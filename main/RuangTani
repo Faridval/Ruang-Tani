@@ -1,0 +1,162 @@
+package com.mycompany.ruangtani;
+
+import controller.LahanController;
+import controller.PekerjaanController;
+import controller.LaporanController;
+import dao.LahanDAOImpl;
+import dao.PekerjaanDAOImpl;
+import dao.LaporanDAOImpl;
+import dao.UserDAOImpl;
+import model.User;
+import model.Pemilik;
+import model.Pekerja;
+import view.MainMenuView;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class RuangTani {
+    public static void main(String[] args) {
+        // Koneksi ke database
+        String jdbcURL = "jdbc:mysql://localhost:3306/db_ruangtani?useSSL=false&serverTimezone=UTC";
+        String dbUsername = "root";
+        String dbPassword = "";
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(jdbcURL, dbUsername, dbPassword);
+            System.out.println("Koneksi berhasil!");
+
+            // Inisialisasi DAO
+            LahanDAOImpl lahanDAO = new LahanDAOImpl(connection);
+            PekerjaanDAOImpl pekerjaanDAO = new PekerjaanDAOImpl(connection);
+            LaporanDAOImpl laporanDAO = new LaporanDAOImpl(connection);
+            UserDAOImpl userDAO = new UserDAOImpl(connection);
+
+            // Inisialisasi Controller
+            LahanController lahanController = new LahanController(lahanDAO);
+            PekerjaanController pekerjaanController = new PekerjaanController(pekerjaanDAO);
+            LaporanController laporanController = new LaporanController(laporanDAO);
+
+            // Mengelola Login dan Sign Up
+            Scanner scanner = new Scanner(System.in);
+
+            boolean exitApp = false; // Flag untuk mengontrol apakah aplikasi harus keluar
+
+            while (!exitApp) { // Loop untuk mengulang menu utama sampai pengguna memilih "Exit"
+                System.out.println("=== Selamat Datang di Aplikasi RuangTani ===");
+                System.out.print("1. Login\n2. Sign Up\n3. Exit\nPilih: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+
+                switch (choice) {
+                    case 1:
+                        // Proses Login
+                        System.out.print("Username: ");
+                        String usernameInput = scanner.nextLine();
+                        System.out.print("Password: ");
+                        String passwordInput = scanner.nextLine();
+
+                        User loggedInUser = userDAO.login(usernameInput, passwordInput);
+                        if (loggedInUser != null) {
+                            if (loggedInUser instanceof Pekerja) {
+                                // Jika login sebagai Pekerja
+                                System.out.println("Selamat anda telah berhasil login sebagai Pekerja.");
+                                showPekerjaMenu(scanner);
+                            } else if (loggedInUser instanceof Pemilik) {
+                                // Jika login sebagai Pemilik
+                                Pemilik pemilik = (Pemilik) loggedInUser; // Cast ke Pemilik
+                                System.out.println("Login berhasil! Selamat datang, " + pemilik.getNama() + " (ID: " + pemilik.getId() + ")");
+
+                                // Menampilkan menu utama untuk Pemilik
+                                MainMenuView mainMenuView = new MainMenuView(lahanController, pekerjaanController, laporanController, pemilik);
+                                mainMenuView.showMainMenu();
+                            }
+                        } else {
+                            System.out.println("Username atau password salah.");
+                        }
+
+                        break;
+
+                    case 2:
+                        // Proses Sign Up dengan pilihan role
+                        System.out.println("Pilih role pengguna: ");
+                        System.out.println("1. Pemilik");
+                        System.out.println("2. Pekerja");
+                        System.out.print("Masukkan pilihan Anda (1/2): ");
+                        int roleChoice = scanner.nextInt();
+                        scanner.nextLine(); // consume newline
+
+                        System.out.print("Username: ");
+                        String usernameInputSignUp = scanner.nextLine();
+                        System.out.print("Password: ");
+                        String passwordInputSignUp = scanner.nextLine();
+                        System.out.print("Nama: ");
+                        String namaInput = scanner.nextLine();
+                        System.out.print("Alamat: ");
+                        String alamatInput = scanner.nextLine();
+
+                        User newUser;
+
+                        if (roleChoice == 1) {
+                            // Jika Pemilik
+                            newUser = new Pemilik(usernameInputSignUp, passwordInputSignUp, namaInput, alamatInput);
+                            System.out.println("Sign up sebagai Pemilik berhasil! Silakan login.");
+                        } else if (roleChoice == 2) {
+                            // Jika Pekerja
+                            newUser = new Pekerja(usernameInputSignUp, passwordInputSignUp, namaInput, alamatInput);
+                            System.out.println("Sign up sebagai Pekerja berhasil! Silakan login.");
+                        } else {
+                            System.out.println("Pilihan role tidak valid. Silakan coba lagi.");
+                            break;
+                        }
+
+                        // Menyimpan pengguna baru ke database
+                        userDAO.signUp(newUser);
+                        break;
+
+                    case 3:
+                        System.out.println("Keluar dari aplikasi...");
+                        exitApp = true; // Mengatur flag agar aplikasi berhenti
+                        break;
+
+                    default:
+                        System.out.println("Pilihan tidak valid.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                    System.out.println("Koneksi ditutup.");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    // Metode untuk menampilkan menu khusus Pekerja
+    private static void showPekerjaMenu(Scanner scanner) {
+        boolean exitPekerjaMenu = false;
+        while (!exitPekerjaMenu) {
+            System.out.println("=== Menu Pekerja ===");
+            System.out.println("1. Kembali ke menu Login/Sign Up");
+            System.out.print("Pilih: ");
+            int pekerjaChoice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (pekerjaChoice) {
+                case 1:
+                    exitPekerjaMenu = true; // Kembali ke menu utama (Login/Sign Up)
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+            }
+        }
+    }
+}
