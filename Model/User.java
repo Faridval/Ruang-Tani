@@ -7,20 +7,29 @@ public class User {
     private String nama;
     private String alamat;
 
-    // Constructor
     public User() {}
 
     public User( String username, String password, String nama, String alamat) {
-     
         this.username = username;
         this.password = password;
         this.nama = nama;
         this.alamat = alamat;
     }
+    
+    public User( String username, String password, String nama, String alamat, int id) {
+        this.username = username;
+        this.password = password;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.id = id;
+    }
 
-    // Getters and Setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -53,5 +62,9 @@ public class User {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public String getRole() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }
