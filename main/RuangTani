@@ -20,7 +20,7 @@ public class RuangTani {
     public static void main(String[] args) {
         String jdbcURL = "jdbc:mysql://localhost:3306/db_ruangtani?useSSL=false&serverTimezone=UTC";
         String dbUsername = "root";
-        String dbPassword = "Adeari157!";
+        String dbPassword = "";
         Connection connection = null;
 
         try {
