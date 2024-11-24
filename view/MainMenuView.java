@@ -4,9 +4,9 @@ import controller.LahanController;
 import controller.PekerjaanController;
 import controller.LaporanController;
 import model.Lahan;
-
 import java.util.List;
 import java.util.Scanner;
+import model.Laporan;
 import model.User;
 
 public class MainMenuView {
@@ -30,7 +30,7 @@ public class MainMenuView {
             System.out.println("\n=== Menu Utama Pemilik Lahan ===");
             System.out.println("1. Kelola Lahan");
             System.out.println("2. Kelola Pekerjaan");
-            System.out.println("3. Lihat Laporan");
+            System.out.println("3. kelola Laporan");
             System.out.println("4. Keluar");
             System.out.print("Pilih: ");
             choice = scanner.nextInt();
@@ -43,7 +43,7 @@ public class MainMenuView {
                     kelolaPekerjaanMenu();
                     break;
                 case 3:
-                    laporanController.getAllLaporan();
+                    kelolaLaporan();
                     break;
                 case 4:
                     System.out.println("Keluar...");
@@ -117,7 +117,7 @@ public class MainMenuView {
         }
 
         // Menambahkan input status lahan
-        System.out.print("Masukkan Status Lahan (Contoh: Aktif, Tidak Aktif): ");
+        System.out.print("Masukkan Status Lahan (Contoh: kosong, Isi): ");
         String statusLahan = scanner.nextLine();
 
         // Membuat objek Lahan baru dengan status lahan
@@ -227,4 +227,64 @@ public class MainMenuView {
                 System.out.println("Pilihan tidak valid.");
         }
     }
+private void kelolaLaporan() {
+    Scanner scanner = new Scanner(System.in);
+    int choice;
+    
+    do {
+        System.out.println("\n=== Kelola Laporan ===");
+        System.out.println("1. Lihat semua laporan");
+        System.out.println("2. Berikan Laporan");
+        System.out.println("3. Hapus Laporan");
+        System.out.println("4. Kembali");
+        System.out.print("Pilih: ");
+        choice = scanner.nextInt();
+        
+        switch (choice) {
+            case 1:
+                // Menampilkan semua laporan
+                List<Laporan> laporanList = laporanController.getAllLaporan(); // Ambil semua laporan
+                System.out.println("=== Daftar Laporan ===");
+                for (Laporan laporan : laporanList) {
+                    System.out.println("ID Laporan: " + laporan.getIdLaporan() + 
+                                       ", Evaluasi: " + laporan.getEvaluasi() + 
+                                       ", Hasil: " + laporan.getHasil() + 
+                                       ", ID Pekerja: " + laporan.getIdPekerja() + 
+                                       ", ID Pekerjaan: " + laporan.getIdPekerjaan());
+                } break;
+            case 2:
+                // Menambahkan laporan
+                System.out.print("Masukkan Evaluasi: ");
+                String evaluasi = scanner.next();
+                System.out.print("Masukkan Hasil: ");
+                String hasil = scanner.next();
+                System.out.print("Masukkan ID Pekerja: ");
+                int idPekerja = scanner.nextInt();
+                System.out.print("Masukkan ID Pekerjaan: ");
+                int idPekerjaan = scanner.nextInt();
+                
+                Laporan laporanBaru = new Laporan();
+                laporanBaru.setEvaluasi(evaluasi);
+                laporanBaru.setHasil(hasil);
+                laporanBaru.setIdPekerja(idPekerja);
+                laporanBaru.setIdPekerjaan(idPekerjaan);
+                
+                laporanController.addLaporan(laporanBaru); // Menambahkan laporan
+                System.out.println("Laporan berhasil ditambahkan.");
+                break;
+            case 3:
+                // Menghapus laporan
+                System.out.print("Masukkan ID Laporan yang ingin dihapus: ");
+                int idLaporan = scanner.nextInt();
+                laporanController.deleteLaporan(idLaporan); // Menghapus laporan
+                System.out.println("Laporan berhasil dihapus.");
+                break;
+            case 4:
+                // Kembali ke menu sebelumnya
+                break;
+            default:
+                System.out.println("Pilihan tidak valid.");
+        }
+    } while (choice != 4); // Ulangi sampai pengguna memilih untuk kembali
+}
 }
