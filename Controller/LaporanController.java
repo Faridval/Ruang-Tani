@@ -3,6 +3,7 @@ package controller;
 import dao.LaporanDAO;
 import model.Laporan;
 import java.util.List;
+import model.Pekerja;
 
 public class LaporanController {
     private LaporanDAO laporanDAO;
@@ -29,5 +30,9 @@ public class LaporanController {
 
     public void deleteLaporan(int idLaporan) {
         laporanDAO.deleteLaporan(idLaporan);
+    }
+
+    public List<Pekerja> getAllPekerja() {
+        return laporanDAO.getAllPekerja();
     }
 }
