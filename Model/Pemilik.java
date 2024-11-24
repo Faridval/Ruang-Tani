@@ -1,16 +1,49 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pemilik extends User {
-    public Pemilik() {}
-    
-    public Pemilik(String username, String password, String nama, String alamat) {
-        super(username, password, nama, alamat);
-//        tambahin array untuk nyimpen id lahan
-    }
-    public Pemilik(String username, String password, String nama, String alamat, int idPemilik) {
-        super(username, password, nama, alamat, idPemilik);
-//        tambahin array untuk nyimpen id lahan
+    private List<Integer> idLahanList;
+
+    public Pemilik() {
+        this.idLahanList = new ArrayList<>();
     }
 
-    // Tambahan properti dan method spesifik untuk Pemilik bisa ditambahkan di sini jika dibutuhkan
+    public Pemilik(String username, String password) {
+        super(username, password, null, null);
+        this.idLahanList = new ArrayList<>();
+    }
+
+    public Pemilik(String username, String password, String nama, String alamat) {
+        super(username, password, nama, alamat);
+        this.idLahanList = new ArrayList<>();
+    }
+
+    public Pemilik(String username, String password, String nama, String alamat, int idPemilik) {
+        super(username, password, nama, alamat, idPemilik);
+        this.idLahanList = new ArrayList<>();
+    }
+
+    public List<Integer> getIdLahanList() {
+        return idLahanList;
+    }
+
+    public void addIdLahan(int idLahan) {
+        this.idLahanList.add(idLahan);
+    }
+
+    public void removeIdLahan(int idLahan) {
+        this.idLahanList.remove(Integer.valueOf(idLahan));
+    }
+
+    @Override
+    public String toString() {
+        return "Pemilik{" +
+                "username='" + getUsername() + '\'' +
+                ", nama='" + getNama() + '\'' +
+                ", alamat='" + getAlamat() + '\'' +
+                ", idLahanList=" + idLahanList +
+                '}';
+    }
 }
