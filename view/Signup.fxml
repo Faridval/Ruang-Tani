@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,44 +13,42 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #8FBC8F;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="203.0" fitWidth="220.0" layoutX="74.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="267.0" fitWidth="266.0" layoutX="42.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Downloads/ruangtani1.jpg" />
+                  <Image url="@../Image/ruangtani1-removebg-preview.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="500.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="signup_form" onDragDetected="#close" prefHeight="500.0" prefWidth="350.0" styleClass="bg-white" stylesheets="@../styles/dahsboardpemiliklahan.css" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="102.0" layoutY="198.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #00F00; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField layoutX="102.0" layoutY="248.0" promptText="Password" style="-fx-background-color: transparent;" />
-            <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="USER" layoutX="62.0" layoutY="220.0" size="20" />
-            <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="KEY" layoutX="61.0" layoutY="270.0" size="20" text="" />
-            <Button layoutX="138.0" layoutY="422.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #8FBC8F;" text="OK" textFill="WHITE" />
-            <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="USERS" layoutX="157.0" layoutY="102.0" size="35" text="" />
-            <Text fill="DARKSEAGREEN" layoutX="136.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register" textAlignment="CENTER">
+            <TextField fx:id="signup_username" layoutX="102.0" layoutY="198.0" promptText="User  Name" style="-fx-background-color: transparent; -fx-border-color: #00F00; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="signup_password" layoutX="102.0" layoutY="248.0" promptText="Password" style="-fx-background-color: transparent;" />
+            <Text layoutX="62.0" layoutY="220.0" style="-fx-font-size: 20; -fx-fill: DARKSEAGREEN;" text="👤" />
+            <Text layoutX="61.0" layoutY="270.0" style="-fx-font-size: 20; -fx-fill: DARKSEAGREEN;" text="🔑" />
+            <Button fx:id="signup_signup" layoutX="138.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleSignup" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #8FBC8F;" text="Signup" textFill="WHITE" /> <!-- Menambahkan onAction -->
+            <Hyperlink fx:id="signup_hyperLink" layoutX="94.0" layoutY="409.0" style="-fx-background-color: transparent;" text="Already have an Account" />
+            <Text layoutX="157.0" layoutY="102.0" style="-fx-font-size: 35; -fx-fill: DARKSEAGREEN;" text="👥" />
+            <Text fill="DARKSEAGREEN" layoutX="123.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User  Signup">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Button layoutX="320.0" layoutY="-1.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-               <graphic>
-                  <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="CLOSE" size="18" text="" />
-               </graphic>
-            </Button>
-            <TextField layoutX="101.0" layoutY="296.0" promptText="Nama" style="-fx-background-color: transparent; -fx-border-color: #00F00; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="101.0" layoutY="350.0" promptText="Alamat" style="-fx-background-color: transparent; -fx-border-color: #00F00; -fx-border-width: 0px 0px 2px 0px;" />
-            <FontAwesomeIconView />
-            <FontAwesomeIconView />
-            <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="USER" layoutX="64.0" layoutY="316.0" size="20" />
-            <FontAwesomeIconView fill="DARKSEAGREEN" glyphName="MAP" layoutX="61.0" layoutY="374.0" size="20" text="" />
-         </children>
+            <Button layoutX="320.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../styles/dahsboardpemiliklahan.css" text="❌" textFill="DARKSEAGREEN" />
+            <Text layoutX="61.0" layoutY="317.0" style="-fx-font-size: 20; -fx-fill: DARKSEAGREEN;" text="📍" />
+            <SplitMenuButton layoutX="104.0" layoutY="293.0" mnemonicParsing="false" text="Pilih Role">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Pekerja" />
+                <MenuItem mnemonicParsing="false" text="Pemilik Lahan" />
+              </items>
+            </SplitMenuButton>
+             </children>
       </AnchorPane>
    </right>
 </BorderPane>
