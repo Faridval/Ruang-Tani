@@ -15,15 +15,13 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void signUp(User user) {
         String sql = user instanceof Pemilik ? 
-            "INSERT INTO Pemilik (ID_Pemilik, username, password, nama, alamat) VALUES (?, ?, ?, ?, ?)" : 
-            "INSERT INTO Pekerja (ID_Pekerja, username, password, nama, alamat) VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO Pemilik (ID_Pemilik, username, password) VALUES (?, ?, ?)" : 
+            "INSERT INTO Pekerja (ID_Pekerja, username, password) VALUES (?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, user.getId());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getPassword());
-            ps.setString(4, user.getNama());
-            ps.setString(5, user.getAlamat());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,4 +87,49 @@ public class UserDAOImpl implements UserDAO {
 
         return users;
     }
+
+    @Override
+    public void signUpPemilik(User user) {
+        String sql = "INSERT INTO Pemilik (username, password) VALUES (?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void signUpPekerja(User user) {
+        String sql = "INSERT INTO Pekerja (username, password) VALUES (?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean isUsernameExist(String username) {
+        String sqlPemilik = "SELECT username FROM Pemilik WHERE username = ?";
+        String sqlPekerja = "SELECT username FROM Pekerja WHERE username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sqlPemilik);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return true;
+
+            ps = connection.prepareStatement(sqlPekerja);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
