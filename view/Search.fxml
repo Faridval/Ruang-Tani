@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" style="-fx-background-color: #8FBC8F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
    <children>
-      <VBox prefHeight="667.0" prefWidth="155.0" style="-fx-background-color: #8FBC8F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                <padding>
@@ -49,7 +49,7 @@
                      </font></Button>
                </children>
             </HBox>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="59.0" prefWidth="162.0" style="-fx-background-color: #b7d5ac;" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="59.0" prefWidth="162.0" style="-fx-background-color: #b7d5ac;" styleClass="navbtn" stylesheets="@Gradasi.css" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -57,7 +57,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="☻Data Diri" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="☻Data Diri" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -65,7 +65,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="✎Kontrak Kerja" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="✎Kontrak Kerja" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -73,7 +73,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="⎙Laporan" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="⎙Laporan" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -81,7 +81,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="🔓 Logout" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🔓 Logout" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -93,7 +93,7 @@
       </VBox>
       <VBox layoutX="155.0" prefHeight="667.0" prefWidth="856.0" style="-fx-alignment: #8FBC8F;">
          <children>
-            <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+            <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;" stylesheets="@Gradasi.css">
                <children>
                   <HBox prefHeight="69.0" prefWidth="856.0">
                      <children>
