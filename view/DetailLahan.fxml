@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" style="-fx-background-color: #8FBC8F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
    <children>
-      <VBox prefHeight="667.0" prefWidth="155.0" style="-fx-background-color: #8FBC8F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                <padding>
@@ -57,7 +57,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="☻Data Diri" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="☻Data Diri" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -65,7 +65,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="✎Kontrak Kerja" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="✎Kontrak Kerja" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -73,7 +73,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="⎙Laporan" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="⎙Laporan" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -81,7 +81,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #8FBC8F;" text="🔓 Logout" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🔓 Logout" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -226,6 +226,14 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Text>
+                                          <Text layoutX="15.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luas" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                             <font>
+                                                <Font name="Arial" size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="258.0" prefWidth="29.0">
@@ -297,6 +305,14 @@
                                                    </VBox.margin>
                                                 </Text>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                   <font>
+                                                      <Font name="Arial" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <Text layoutX="15.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
                                                    <font>
                                                       <Font name="Arial" size="16.0" />
                                                    </font>
@@ -382,6 +398,14 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Text>
+                                          <Text layoutX="15.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 h" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                             <font>
+                                                <Font name="Arial" size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
                                        </children>
                                     </VBox>
                                  </children>
@@ -390,15 +414,15 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="95.0" prefWidth="856.0">
+                  <VBox prefHeight="45.0" prefWidth="856.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="94.0" prefWidth="856.0">
+                        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="856.0">
                            <children>
-                              <HBox prefHeight="170.0" prefWidth="428.0">
+                              <HBox prefHeight="30.0" prefWidth="428.0">
                                  <children>
-                                    <VBox prefHeight="111.0" prefWidth="419.0">
+                                    <VBox prefHeight="46.0" prefWidth="419.0">
                                        <children>
-                                          <VBox alignment="CENTER" prefHeight="176.0" prefWidth="419.0">
+                                          <VBox alignment="CENTER" prefHeight="51.0" prefWidth="419.0">
                                              <children>
                                                 <SplitMenuButton mnemonicParsing="false" text="Pilih Pekerjaan">
                                                   <items>
@@ -413,103 +437,6 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="133.0" prefWidth="277.0" style="-fx-background-color: white; -fx-background-radius: 10;">
-                                 <children>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="133.0" prefWidth="135.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lama Bekerja">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gaji">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                       </children>
-                                       <opaqueInsets>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </opaqueInsets>
-                                    </VBox>
-                                    <VBox alignment="CENTER" prefHeight="170.0" prefWidth="18.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="20.601561546325684">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="20.601561546325684">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="20.601561546325684">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="170.0" prefWidth="263.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2 Bulan">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="700.000">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                          <Text layoutX="10.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tersedia">
-                                             <font>
-                                                <Font name="Arial" size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <effect>
-                                    <DropShadow radius="8.5" width="15.0" />
-                                 </effect>
-                                 <opaqueInsets>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </opaqueInsets>
-                              </HBox>
                            </children>
                         </HBox>
                         <VBox prefHeight="5.0" prefWidth="856.0" />
@@ -517,9 +444,9 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="74.0" prefWidth="856.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-background-color: #8FBC8F;" text="Apply" textAlignment="CENTER" textFill="WHITE">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-background-color: #8FBC8F;" text="APPLY" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                            <effect>
                               <DropShadow radius="8.5" width="15.0" />
