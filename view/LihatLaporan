@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
+   <children>
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="109.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Gambar_WhatsApp_2024-11-02_pukul_22.26.01_edac9a93-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow height="7.0" radius="8.75" width="30.0">
+                     <color>
+                        <Color red="0.7372549176216125" green="0.6196078658103943" blue="0.6196078658103943" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Pane>
+            <HBox prefHeight="36.0" prefWidth="155.0">
+               <children>
+                  <Button prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: transparent; -fx-text-fill: WHITE;" text="PEKERJA" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="59.0" prefWidth="162.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="☻Data Diri" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="✎Kontrak Kerja" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" style="-fx-background-color: #b7d5ac;" styleClass="navbtn" text="⎙Laporan" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🔓 Logout" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="155.0" prefHeight="667.0" prefWidth="856.0" style="-fx-alignment: #8FBC8F;">
+         <children>
+            <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+               <children>
+                  <HBox prefHeight="69.0" prefWidth="856.0">
+                     <children>
+                        <Text fill="DARKSEAGREEN" strokeType="OUTSIDE" strokeWidth="0.0" text="LAPORAN EVALUASI" textAlignment="CENTER" wrappingWidth="409.63153076171875">
+                           <font>
+                              <Font name="Arial Bold" size="35.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="599.0" prefWidth="856.0">
+                     <children>
+                        <VBox prefHeight="610.0" prefWidth="856.0">
+                           <children>
+                              <HBox prefHeight="601.0" prefWidth="856.0">
+                                 <children>
+                                    <HBox prefHeight="171.0" prefWidth="857.0">
+                                       <children>
+                                          <TabPane prefHeight="313.0" prefWidth="856.0" tabClosingPolicy="UNAVAILABLE">
+                                            <tabs>
+                                              <Tab text="Laporan">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox layoutX="69.0" layoutY="38.0" prefHeight="492.0" prefWidth="717.0">
+                                                               <children>
+                                                                  <VBox prefHeight="492.0" prefWidth="259.0">
+                                                                     <children>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama Pekerja" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor KTP" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alamat" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor HP" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pengalaman/Riwayat Pekerjaan" textAlignment="JUSTIFY" wrappingWidth="236.13662719726562">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama Pemilik" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lokasi" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lama Bekerja" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gaji" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fasilitas" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jenis Bibit" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jenis Lahan" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerjaan yang Dipilih" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luas" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Panen" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evaluasi Pemilik" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="258.0" prefWidth="59.0">
+                                                                     <children>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="258.0" prefWidth="203.0">
+                                                                     <children>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rudi Haryoto" textAlignment="JUSTIFY" wrappingWidth="398.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="317292739274038" textAlignment="JUSTIFY" wrappingWidth="397.47003173828125">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jl.Sawo Matang" textAlignment="JUSTIFY" wrappingWidth="400.8034133911133">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="08392829182982" textAlignment="JUSTIFY" wrappingWidth="410.8033447265625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Magang Petani" textAlignment="JUSTIFY" wrappingWidth="408.13677978515625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Erwin" textAlignment="JUSTIFY" wrappingWidth="404.13677978515625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dataran Rendah" textAlignment="JUSTIFY" wrappingWidth="404.13677978515625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Bulan" textAlignment="JUSTIFY" wrappingWidth="411.4700927734375">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rp200.000" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pupuk, air, bibit" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="15.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sawi" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dataran Rendah" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menanam" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 h" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 kg" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                        <Text layoutX="10.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tanah kering bgt... lebih dirawat lg untuk ke depannya" textAlignment="JUSTIFY" wrappingWidth="424.13677978515625">
+                                                                           <font>
+                                                                              <Font name="Arial" size="16.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Text>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                </content>
+                                              </Tab>
+                                              <Tab text="Evaluasi">
+                                                   <content>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <AnchorPane prefHeight="569.0" prefWidth="859.0">
+                                                               <children>
+                                                                  <HBox layoutX="69.0" layoutY="38.0" prefHeight="493.0" prefWidth="739.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="518.0" prefWidth="194.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama Pemilik" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor KTP" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alamat" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor HP" textAlignment="JUSTIFY" wrappingWidth="118.13671875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama Pekerja" textAlignment="JUSTIFY" wrappingWidth="236.13662719726562">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lokasi" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lama Bekerja" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gaji" textAlignment="JUSTIFY" wrappingWidth="187.47000122070312">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerjaan yang Dipilih" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Panen" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evaluasi Pekerja" textAlignment="JUSTIFY" wrappingWidth="193.47000885009766">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="493.0" prefWidth="30.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="15.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="15.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="12.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox prefHeight="258.0" prefWidth="203.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Erwin" textAlignment="JUSTIFY" wrappingWidth="398.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="245654357808987" textAlignment="JUSTIFY" wrappingWidth="397.47003173828125">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jl.Sawo Matang" textAlignment="JUSTIFY" wrappingWidth="400.8034133911133">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="083719727818" textAlignment="JUSTIFY" wrappingWidth="410.8033447265625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rudi Haryoto" textAlignment="JUSTIFY" wrappingWidth="408.13677978515625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dataran Rendah" textAlignment="JUSTIFY" wrappingWidth="404.13677978515625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Bulan" textAlignment="JUSTIFY" wrappingWidth="411.4700927734375">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rp200.000" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menanam" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 kg" textAlignment="JUSTIFY" wrappingWidth="306.80340576171875">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                              <Text layoutX="10.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasil yang dipanen bagus cuma kurang disiplin" textAlignment="JUSTIFY" wrappingWidth="424.13677978515625">
+                                                                                 <font>
+                                                                                    <Font name="Arial" size="16.0" />
+                                                                                 </font>
+                                                                                 <VBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </VBox.margin>
+                                                                              </Text>
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children></AnchorPane>
+                                                         </children>
+                                                      </HBox>
+                                                   </content>
+                                              </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow height="7.0" radius="8.75" width="30.0">
+               <color>
+                  <Color red="0.7372549176216125" green="0.6196078658103943" blue="0.6196078658103943" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <HBox layoutX="681.0" layoutY="425.0" prefHeight="100.0" prefWidth="200.0" />
+      <HBox layoutX="698.0" layoutY="399.0" prefHeight="100.0" prefWidth="200.0" />
+      <HBox layoutX="611.0" layoutY="357.0" prefHeight="100.0" prefWidth="200.0" />
+      <HBox layoutX="611.0" layoutY="357.0" prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>
