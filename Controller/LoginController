@@ -1,115 +1,124 @@
 package Controller;
 
-import dao.BaseDAO;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import model.Pemilik;
-import model.Pekerja;
-import model.User;
+import dao.UserDAO;
 import dao.UserDAOImpl;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import model.User;
+
+import java.sql.Connection;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField login_username;
+
     @FXML
     private PasswordField login_password;
+
     @FXML
-    private Text feedbackText;
+    private Button login_button;
+    
     @FXML
     private Hyperlink login_hyperlink;
-
-    private UserDAOImpl userDAO;
-
-
-    private void initialize() throws SQLException {
-        Connection connection = BaseDAO.getConnection();
-        userDAO = new UserDAOImpl(connection);
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Inisialisasi jika diperlukan
     }
 
-    public void initializeController() {
-        try {
-            initialize();
-        } catch (SQLException e) {
-            feedbackText.setText("Terjadi kesalahan saat menghubungkan ke database.");
-            e.printStackTrace();
-        }
-    }
-
+    // Method untuk menangani login
     @FXML
-    private void handleLoginAction() {
+    private void handleLogin(ActionEvent event) {
         String username = login_username.getText();
         String password = login_password.getText();
 
-        User loggedInUser = null;
-
-        try {
-            if (userDAO == null) {
-                initialize();
-            }
-            loggedInUser = userDAO.login(username, password);
-        } catch (SQLException e) {
-            feedbackText.setText("Terjadi kesalahan saat memverifikasi login.");
-            e.printStackTrace();
+        // Validasi input kosong
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Semua field harus diisi!");
             return;
         }
 
-        if (loggedInUser != null) {
-            try {
-                FXMLLoader loader;
-                AnchorPane page;
-
-                if (loggedInUser instanceof Pekerja) {
-                    loader = new FXMLLoader(getClass().getResource("/View/DashboardPekerja.fxml"));
-                    page = loader.load();
-                } else if (loggedInUser instanceof Pemilik) {
-                    Pemilik pemilik = (Pemilik) loggedInUser;
-                    System.out.println("Login berhasil! Selamat datang, " + pemilik.getNama());
-
-                    loader = new FXMLLoader(getClass().getResource("/View/DashboardPemilikLahan.fxml"));
-                    page = loader.load();
-                } else {
-                    feedbackText.setText("Peran pengguna tidak valid.");
-                    return;
-                }
-
-                Scene scene = new Scene(page);
-                Stage stage = (Stage) login_username.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                feedbackText.setText("Terjadi kesalahan saat memuat halaman.");
-                e.printStackTrace();
+        try {
+            // Koneksi ke database
+            Connection connection = dao.BaseDAO.getConnection();
+            if (connection == null) {
+                showAlert("Koneksi ke database gagal!");
+                return;
             }
-        } else {
-            feedbackText.setText("Username atau password salah.");
+
+            UserDAO userDAO = new UserDAOImpl(connection);
+
+            // Cek kredensial pengguna
+            User user = userDAO.login(username, password);
+
+            if (user != null) {
+                // Tentukan role dan arahkan ke halaman yang sesuai
+                String role = user.getRole();
+                System.out.println("Role pengguna: " + role); // Debugging output
+
+                if (role.equalsIgnoreCase("Pemilik")) {
+                    navigateToDashboard("/View/DahsboardPemilikLahan.fxml", "Dahsboard Pemilik Lahan");
+                } else if (role.equalsIgnoreCase("Pekerja")) {
+                    navigateToDashboard("/View/HomePekerja.fxml", "Dashboard Pekerja");
+                } else {
+                    showAlert("Role tidak dikenali!");
+                }
+            } else {
+                showAlert("Username atau Password salah!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Cetak stack trace untuk debugging
+            showAlert("Terjadi kesalahan saat login. Silakan coba lagi.");
         }
     }
 
-    @FXML
-    private void handleSignupAction() {
+    // Method untuk berpindah ke dashboard
+    private void navigateToDashboard(String fxmlPath, String title) {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) login_button.getScene().getWindow(); // Ambil stage saat ini
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle(title);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace(); // Cetak stack trace untuk debugging
+            showAlert("Terjadi kesalahan saat membuka dashboard.");
+        }
+    }
+    
+    @FXML
+    private void goToSignup() {
+        try {
+            // Muat file FXML untuk Login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Signup.fxml"));
-            AnchorPane signupPage = loader.load(); 
-
-            Scene scene = new Scene(signupPage);
-            Stage stage = (Stage) login_username.getScene().getWindow();  
-            stage.setScene(scene); 
+            Stage stage = (Stage) login_hyperlink.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Signup");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            feedbackText.setText("Terjadi kesalahan saat memuat halaman signup.");
         }
+    }
+    
+    // Method untuk menampilkan alert
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
