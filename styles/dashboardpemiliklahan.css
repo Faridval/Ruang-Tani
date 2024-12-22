@@ -1,0 +1,114 @@
+.mainFxmlClass {
+    /* Tambahkan aturan di sini jika diperlukan */
+}
+
+.top-form {
+    -fx-background-color: #ffffff; /* Warna putih */
+    -fx-border-color: #000000; /* Warna hitam */
+    -fx-border-width: 0.2px 0.2px 0.4px 0.2px; /* Lebar border untuk setiap sisi */
+}
+
+.close {
+    -fx-background-color: #ffffff; /* Warna putih */
+/*    -fx-border-color: #000000;  Border harus memiliki warna valid */
+    -fx-border-width: 1px; /* Tentukan lebar default */
+}
+
+.close:hover {
+    -fx-background-color: #e74141; /* Warna saat hover */
+}
+
+.nav-form {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #1e242e, #8fbc8f); /* Gradien dengan format JavaFX */
+}
+
+.navbtn {
+    -fx-background-color: transparent; /* Latar belakang transparan */
+    -fx-cursor: hand; /* Ubah kursor menjadi tangan */
+    -fx-font-size: 16px; /* Ukuran font */
+    -fx-alignment: CENTER_LEFT; /* Perataan teks ke kiri */
+}
+
+.navbtn:hover {
+    -fx-background-color: #8fbc8f; /* Ubah warna saat hover */
+}
+
+.signout {
+    -fx-background-color: #D3D3D3; /* Warna hijau */
+    -fx-background-radius: 15px; /* Membulatkan sudut */
+    -fx-cursor: hand; /* Ubah kursor menjadi tangan saat hover */
+}
+
+.signout:hover {
+    -fx-background-color: #e74141; /* Warna merah saat hover */
+}
+
+.bg-white {
+    -fx-background-color: #ffffff; /* Warna putih */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 3), 8, 0, 0, 0);
+    -fx-background-radius:8px;
+}
+
+.bg-white:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 3), 8, 0, 0, 0);
+}
+
+.textfield {
+    -fx-background-color: transparent; /* Latar belakang transparan */
+    -fx-border-color: linear-gradient(to top right, #8FBC8F, #32CD32);
+    -fx-border-width: 0px 0px 1px 0px; /* Lebar border (bawah saja) */
+    -fx-font-family: "Tahoma"; /* Font */
+    -fx-font-size: 13px; /* Ukuran font */
+}
+
+.textfield:focused{
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.combobox{
+    -fx-background-color: transparent; /* Latar belakang transparan */
+    -fx-border-color: linear-gradient(to top right, #8FBC8F, #32CD32);
+    -fx-border-width: 1px; /* Lebar border (bawah saja) */
+    -fx-font-family: "Tahoma"; /* Font */
+    -fx-font-size: 13px; /* Ukuran font */
+}
+
+.combobox:focused{
+    -fx-border-width: 2px;
+}
+
+.table-view{
+    -fx-background-color: transparent; /* Latar belakang transparan */
+    -fx-border-color: linear-gradient(to bottom right, #8FBC8F, #32CD32);
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-padding: 0px;
+}
+
+/* Efek border shadow */
+.shadowed-pane {
+    -fx-background-color: white;
+
+    /* Efek bayangan */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 4);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #8FBC8F, #32CD32);
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-background-size: 40px;
+}
+
+
+/*.table-view .column-header, .label {
+    -fx-text-fill: #fff;
+    -fx-font-family: "Arial";
+}*/
+
+
+
+
