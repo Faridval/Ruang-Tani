@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="684.0" prefWidth="1031.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DahsboardPemilikLahanController">
+    <stylesheets>
+        <URL value="@/styles/dahsboardpemiliklahan.css" />
+    </stylesheets>
+   <children>
+      <BorderPane layoutX="400.0" layoutY="99.0" prefHeight="684.0" prefWidth="1031.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="44.0" prefWidth="1031.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="148.0" layoutY="-70.0" prefHeight="38.0" prefWidth="1031.0" styleClass="top-form" stylesheets="@../styles/dahsboardpemiliklahan.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="21.0" layoutY="13.0" text="Ruang Tani">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../styles/dahsboardpemiliklahan.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" layoutX="60.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 80;" text="👤" />
+                  <Label layoutX="78.0" layoutY="117.0" text="Role" textFill="WHITE">
+                     <font>
+                        <Font name="MS Reference Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="19.0" layoutY="142.0" text="Pemilik Lahan" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="MS Reference Sans Serif" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="7.0" layoutY="197.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Kelola Lahan" textFill="#eeecec">
+                     <graphic>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="⚙" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+                  <Button fx:id="button_kelolaPekerjaan" layoutX="7.0" layoutY="236.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text=" Kelola Pekerjaan" textFill="WHITE">
+                     <graphic>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="⚙" />
+                     </graphic></Button>
+                  <Button fx:id="button_laporanPemilik" layoutX="7.0" layoutY="275.0" mnemonicParsing="false" onAction="#switchScene2" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Laporan" textFill="WHITE">
+                     <graphic>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="📋" />
+                     </graphic></Button>
+                  <Button fx:id="button_BiodataPemilik" layoutX="7.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchScene3" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Biodata" textFill="WHITE">
+                     <graphic>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="📋" />
+                     </graphic></Button>
+                  <Button fx:id="logout_pemilik" layoutX="34.0" layoutY="547.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="43.0" styleClass="signout" stylesheets="@../styles/dahsboardpemiliklahan.css" text="🔓" textFill="GREEN">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Label layoutX="82.0" layoutY="557.0" text="Log Out" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="90.0" layoutY="153.0" prefHeight="640.0" prefWidth="831.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="614.0" prefWidth="233.0" styleClass="bg-white" stylesheets="@../styles/dahsboardpemiliklahan.css">
+                           <children>
+                              <Label layoutX="38.0" layoutY="42.0" text="Lokasi:">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="addLahan_lokasi" layoutX="82.0" layoutY="35.0" prefHeight="31.0" prefWidth="147.0" styleClass="textfield" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+                              <Label layoutX="48.0" layoutY="85.0" text="Luas:">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="12.0" layoutY="127.0">
+                                 <font>
+                                    <Font name="Tahoma" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="addLahan_luas" layoutX="82.0" layoutY="78.0" prefHeight="31.0" prefWidth="147.0" promptText="(dalam hektar)" styleClass="textfield" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+                              <Label layoutX="10.0" layoutY="127.0" text="Jenis Lahan:">
+                                 <font>
+                                    <Font name="Tahoma" size="13.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="addLahan_jenis" layoutX="81.0" layoutY="120.0" onAction="#addLahansListJenis" prefWidth="150.0" promptText="Choose" styleClass="combobox" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+                              <Label layoutX="38.0" layoutY="166.0" text="Status:">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="addLahan_status" layoutX="81.0" layoutY="159.0" onAction="#addLahansListStatus" prefWidth="150.0" promptText="Choose" styleClass="combobox" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+                              <Button fx:id="addLahan_ubah" layoutX="127.0" layoutY="471.0" mnemonicParsing="false" onAction="#addLahanUpdate" prefHeight="46.0" prefWidth="90.0" style="-fx-background-color: #1E90FF;" text="Ubah" textFill="WHITE" />
+                              <Button fx:id="addLahan_tambah" layoutX="20.0" layoutY="471.0" mnemonicParsing="false" onAction="#addLahanAdd" prefHeight="46.0" prefWidth="90.0" style="-fx-background-color: #008000;" text="Tambah" textFill="WHITE" />
+                              <Button fx:id="addLahan_hapus" layoutX="20.0" layoutY="537.0" mnemonicParsing="false" onAction="#addLahanDelete" prefHeight="46.0" prefWidth="90.0" style="-fx-background-color: #ff0000;" text="Hapus" textFill="WHITE" />
+                              <AnchorPane layoutX="54.0" layoutY="288.0" prefHeight="161.0" prefWidth="131.0" styleClass="shadowed-pane" stylesheets="@../styles/dahsboardpemiliklahan.css">
+                                 <children>
+                                    <Button fx:id="importBtn" layoutY="130.0" mnemonicParsing="false" onAction="#addLahanImportImage" prefHeight="31.0" prefWidth="131.0" text="Import" />
+                                    <ImageView fx:id="addLahan_imageView" fitHeight="130.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </AnchorPane>
+                              <TextField fx:id="addLahan_jenisBibit" layoutX="82.0" layoutY="200.0" prefHeight="31.0" prefWidth="147.0" styleClass="textfield" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+                              <Label layoutX="23.0" layoutY="208.0" text="Jenis Bibit:">
+                                 <font>
+                                    <Font name="Tahoma" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="addLahan_reset" layoutX="127.0" layoutY="537.0" mnemonicParsing="false" onAction="#addLahanReset" prefHeight="46.0" prefWidth="90.0" style="-fx-background-color: #BA8E23;" text="Reset" textFill="WHITE" />
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="255.0" layoutY="13.0" prefHeight="614.0" prefWidth="565.0" styleClass="bg-white" stylesheets="@../styles/dahsboardpemiliklahan.css">
+                           <children>
+                              <TextField fx:id="addLahan_search" layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="246.0" promptText="🔎 Search" />
+                              <TableView fx:id="addLahan_tableView" layoutX="8.0" layoutY="63.0" prefHeight="540.0" prefWidth="550.0">
+                                <columns>
+                                  <TableColumn fx:id="addLahan_tblLokasi" prefWidth="120.0" text="Lokasi" />
+                                  <TableColumn fx:id="addLahan_tblLuas" prefWidth="86.0" text="Luas" />
+                                    <TableColumn fx:id="addLahan_tblJenis" prefWidth="130.0" text="Jenis Lahan" />
+                                    <TableColumn fx:id="addLahan_tblStatus" prefWidth="91.0" text="Status" />
+                                    <TableColumn fx:id="addLahan_tblBibit" prefWidth="121.0" text="Jenis Bibit" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
