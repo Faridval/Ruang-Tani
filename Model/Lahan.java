@@ -1,33 +1,32 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Lahan {
     private int idLahan;
     private String statusLahan;
     private String lokasi;
     private double luas;
     private String jenisLahan;
+    private String jenisBibit;
     private int idPemilik;
-    private List<Pekerja> pekerjaList;  // Tambahkan array untuk menyimpan pekerja
-
-    // Constructor tanpa parameter
-    public Lahan() {
-        pekerjaList = new ArrayList<>();  // Inisialisasi array list pekerja
+    private String image;
+    
+    public Lahan(){
     }
 
-    // Constructor dengan statusLahan dan idPemilik
-    public Lahan(String lokasi, double luas, String jenisLahan, int idPemilik, String statusLahan) {
+    // Konstruktor untuk menginisialisasi semua atribut
+    public Lahan(int idLahan, String statusLahan, String lokasi, double luas, String jenisLahan, String jenisBibit, int idPemilik, String image) {
+        this.idLahan = idLahan;
+        this.statusLahan = statusLahan;
         this.lokasi = lokasi;
         this.luas = luas;
         this.jenisLahan = jenisLahan;
+        this.jenisBibit = jenisBibit;
         this.idPemilik = idPemilik;
-        this.statusLahan = statusLahan;  // Tambahkan statusLahan
-        this.pekerjaList = new ArrayList<>();  // Inisialisasi array list pekerja
+        this.image = image;
+        
     }
 
-    // Getters and Setters
+    // Getter dan Setter (Opsional, jika diperlukan)
     public int getIdLahan() {
         return idLahan;
     }
@@ -68,6 +67,14 @@ public class Lahan {
         this.jenisLahan = jenisLahan;
     }
 
+    public String getJenisBibit() {
+        return jenisBibit;
+    }
+
+    public void setJenisBibit(String jenisBibit) {
+        this.jenisBibit = jenisBibit;
+    }
+
     public int getIdPemilik() {
         return idPemilik;
     }
@@ -76,21 +83,11 @@ public class Lahan {
         this.idPemilik = idPemilik;
     }
 
-    public List<Pekerja> getPekerjaList() {
-        return pekerjaList;
+    public String getImage() {
+        return image;
     }
 
-    public void setPekerjaList(List<Pekerja> pekerjaList) {
-        this.pekerjaList = pekerjaList;
-    }
-
-    // Method to add a pekerja to the list
-    public void addPekerja(Pekerja pekerja) {
-        this.pekerjaList.add(pekerja);
-    }
-
-    // Method to remove a pekerja from the list
-    public void removePekerja(Pekerja pekerja) {
-        this.pekerjaList.remove(pekerja);
+    public void setImage(String image) {
+        this.image = image;
     }
 }
