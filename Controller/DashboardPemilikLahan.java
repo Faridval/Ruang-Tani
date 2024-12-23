@@ -2,6 +2,8 @@ package Controller;
 
 import com.mysql.cj.protocol.Resultset;
 import dao.BaseDAO;
+import dao.LahanDAO;
+import dao.LahanDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
 import java.io.File;
@@ -37,6 +39,8 @@ import java.sql.Types;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -51,6 +55,9 @@ public class DahsboardPemilikLahanController implements Initializable {
 
     @FXML
     private Button button_laporanPemilik;
+    
+     @FXML
+    private Button button_BiodataPemilik;
 
     @FXML
     private Text button_biodataPemilik;
@@ -79,6 +86,9 @@ public class DahsboardPemilikLahanController implements Initializable {
 
     @FXML
     private Button addLahan_hapus;
+    
+    @FXML
+    private Button addLahan_reset;
 
     @FXML
     private Button importBtn;
@@ -120,7 +130,7 @@ public class DahsboardPemilikLahanController implements Initializable {
      @FXML
     public void addLahanAdd(ActionEvent event) {
     // Pastikan koneksi database dan kontrol UI sudah diinisialisasi
-    String sql = "INSERT INTO lahan (Lokasi, Luas, Jenis_lahan, Status_Lahan, image) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO lahan (Lokasi, Luas, Jenis_lahan, Status_Lahan, jenis_bibit, image) VALUES (?, ?, ?, ?, ?, ?)";
     
     try {
         // Validasi input
@@ -134,14 +144,15 @@ public class DahsboardPemilikLahanController implements Initializable {
             prepare.setString(2, addLahan_luas.getText());
             prepare.setString(3, addLahan_jenis.getValue());
             prepare.setString(4, addLahan_status.getValue());
+            prepare.setString(5, addLahan_jenisBibit.getText());
             
             // Proses path gambar
             String imagePath = getData.path;
             if (imagePath != null && !imagePath.isEmpty()) {
                 imagePath = imagePath.replace("\\", "\\\\");
-                prepare.setString(5, imagePath);
+                prepare.setString(6, imagePath);
             } else {
-                prepare.setNull(5, Types.VARCHAR);
+                prepare.setNull(6, Types.VARCHAR);
             }
             
             // Eksekusi query
@@ -174,31 +185,35 @@ public class DahsboardPemilikLahanController implements Initializable {
     }
 }
     
-    @FXML
-    public void addLahanUpdate(ActionEvent event) {
-    String sql = "UPDATE lahan SET Lokasi = ?, Luas = ?, Jenis_lahan = ?, Status_Lahan = ?, image = ? WHERE Lokasi = ?";
+@FXML
+public void addLahanUpdate(ActionEvent event) {
+    String sql = "UPDATE lahan SET Lokasi = ?, Luas = ?, Jenis_lahan = ?, jenis_bibit = ?, Status_Lahan = ?, image = ? WHERE Lokasi = ?";
     
     try {
         if (isInputValid()) {
             Connection connection = BaseDAO.getConnection();
             PreparedStatement prepare = connection.prepareStatement(sql);
             
+            // Set nilai parameter
             prepare.setString(1, addLahan_lokasi.getText());
             prepare.setString(2, addLahan_luas.getText());
             prepare.setString(3, addLahan_jenis.getValue());
-            prepare.setString(4, addLahan_status.getValue());
+            prepare.setString(4, addLahan_jenisBibit.getText());
+            prepare.setString(5, addLahan_status.getValue());
             
+            // Atur image path
             String imagePath = getData.path;
             if (imagePath != null && !imagePath.isEmpty()) {
                 imagePath = imagePath.replace("\\", "\\\\");
-                prepare.setString(5, imagePath);
+                prepare.setString(6, imagePath);
             } else {
-                prepare.setNull(5, Types.VARCHAR);
+                prepare.setNull(6, Types.VARCHAR);
             }
             
-            // Gunakan lokasi asli sebagai kunci untuk update
-            prepare.setString(6, addLahan_tableView.getSelectionModel().getSelectedItem().getLokasi());
+            // Lokasi asli sebagai kunci
+            prepare.setString(7, addLahan_tableView.getSelectionModel().getSelectedItem().getLokasi());
             
+            // Eksekusi update
             int rowsAffected = prepare.executeUpdate();
             
             if (rowsAffected > 0) {
@@ -219,6 +234,7 @@ public class DahsboardPemilikLahanController implements Initializable {
         e.printStackTrace();
     }
 }
+
 
 
 // Metode validasi input
@@ -243,6 +259,11 @@ private boolean isInputValid() {
         return false;
     }
     
+    if (addLahan_jenisBibit.getText().isEmpty()) {
+        showAlert(Alert.AlertType.ERROR, "Validasi", "Bibit harus diisi");
+        return false;
+    }
+    
     if (getData.path == null || getData.path.isEmpty()) {
         showAlert(Alert.AlertType.ERROR, "Validasi", "Gambar harus dipilih");
         return false;
@@ -260,27 +281,17 @@ private void showAlert(Alert.AlertType type, String title, String content) {
     alert.showAndWait();
 }
 
-// Metode untuk me-reset field
-//private void addLahanReset() {
-//    addLahan_lokasi.clear();
-//    addLahan_luas.clear();
-//    addLahan_jenis.setValue(null);
-//    addLahan_status.setValue(null);
-//    // Reset gambar jika perlu
-//    getData.path = "";
-//    // Tambahkan logika reset gambar di sini
-//}
-    
-//    @FXML
-//    public void addLahanReset(){
-//        addLahan_lokasi.setText("");
-//        addLahan_luas.setText("");
-//        addLahan_jenis.getSelectionModel().clearSelection();
-//        addLahan_status.getSelectionModel().clearSelection();
-//        addLahan_imageView.setImage(null);
-//        
-//        getData.path="";
-//    }
+    public void addLahanReset(){
+       addLahan_lokasi.setText("");
+       addLahan_luas.setText("");
+       addLahan_jenis.getSelectionModel().clearSelection();
+       addLahan_status.getSelectionModel().clearSelection();
+       addLahan_jenisBibit.setText("");
+       addLahan_imageView.setImage(null);
+        
+       getData.path="";
+   }
+
     
     @FXML
     public void addLahanImportImage(ActionEvent event) {
@@ -310,38 +321,47 @@ private void showAlert(Alert.AlertType type, String title, String content) {
     ObservableList<String> listData = FXCollections.observableArrayList(listStatus);
     addLahan_status.setItems(listData);
     }
-
-
+    
+    //observableList
     public ObservableList<Lahan> addLahanListData() {
     ObservableList<Lahan> lahanList = FXCollections.observableArrayList();
-    
     try {
-        Connection connection = BaseDAO.getConnection();
-        UserDAO userDAO = new UserDAOImpl(connection);
-        
-        String sql = "SELECT * FROM lahan";
-        
-        PreparedStatement prepare = connection.prepareStatement(sql);
-        ResultSet result = prepare.executeQuery();
-        
-        while(result.next()) {
-            Lahan lhn = new Lahan(
-                result.getString("Lokasi"), 
-                result.getDouble("Luas"), 
-                result.getString("Jenis_lahan"), 
-                result.getString("Status_lahan"), 
-                result.getString("jenis_bibit"));
-            lahanList.add(lhn);
+        String sql = "SELECT * FROM Lahan";
+        try (Statement statement = BaseDAO.getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                Lahan lahan = new Lahan();
+                lahan.setIdLahan(resultSet.getInt("ID_Lahan"));
+                lahan.setStatusLahan(resultSet.getString("Status_lahan"));
+                lahan.setLokasi(resultSet.getString("Lokasi"));
+                lahan.setLuas(resultSet.getDouble("Luas"));
+                lahan.setJenisLahan(resultSet.getString("Jenis_lahan"));
+                lahan.setJenisBibit(resultSet.getString("jenis_bibit"));
+                lahan.setImage(resultSet.getString("image"));
+                lahan.setIdPemilik(resultSet.getInt("ID_Pemilik"));
+                lahanList.add(lahan);
+            }
         }
-        
-        return lahanList;
-        
-    } catch(Exception e) {
+    } catch (SQLException e) {
         e.printStackTrace();
-        return FXCollections.observableArrayList();
     }
+    return lahanList;
 }
-
+    
+    private ObservableList<Lahan> addLahanList;
+    public void addLahanShowListData(){
+        addLahanList = addLahanListData();
+        
+        addLahan_tableView.getItems().clear();
+//        sesuaikan dengan yg ada di Lahan.java Model
+        addLahan_tblLokasi.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
+        addLahan_tblLuas.setCellValueFactory(new PropertyValueFactory<>("luas"));
+        addLahan_tblJenis.setCellValueFactory(new PropertyValueFactory<>("jenisLahan"));
+        addLahan_tblStatus.setCellValueFactory(new PropertyValueFactory<>("statusLahan"));
+        addLahan_tblBibit.setCellValueFactory(new PropertyValueFactory<>("jenisBibit"));
+        
+        addLahan_tableView.setItems(addLahanList);
+    } 
 
     @FXML
     public void addLahanDelete(ActionEvent event) {
@@ -386,18 +406,6 @@ private void showAlert(Alert.AlertType type, String title, String content) {
 }
 
     
-    private ObservableList<Lahan> addLahanList;
-    public void addLahanShowListData(){
-        addLahanList = addLahanListData();
-//        sesuaikan dengan yg ada di Lahan.java Model
-        addLahan_tblLokasi.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
-        addLahan_tblLuas.setCellValueFactory(new PropertyValueFactory<>("luas"));
-        addLahan_tblJenis.setCellValueFactory(new PropertyValueFactory<>("jenisLahan"));
-        addLahan_tblStatus.setCellValueFactory(new PropertyValueFactory<>("statusLahan"));
-        addLahan_tblBibit.setCellValueFactory(new PropertyValueFactory<>("jenisBibit"));
-        
-        addLahan_tableView.setItems(addLahanList);
-    } 
     
     @FXML
     public void addLahansSelect() {
@@ -416,46 +424,20 @@ private void showAlert(Alert.AlertType type, String title, String content) {
     addLahan_jenis.setValue(lhn.getJenisLahan());
     addLahan_status.setValue(lhn.getStatusLahan());
     
-    // Set image
-    if (lhn.getimage() != null && !lhn.getimage().isEmpty()) {
-        String uri = "file:" + lhn.getimage();
-        image = new Image(uri, 131, 130, false, true);
-        addLahan_imageView.setImage(image);
-        getData.path = lhn.getimage(); // Set path untuk update
-    } else {
-        addLahan_imageView.setImage(null);
-        getData.path = "";
-        }
-    }
-   
-    @FXML
-    public void addLahanSearch(ActionEvent event) {
-    String searchQuery = addLahan_search.getText().toLowerCase();
-
-    ObservableList<Lahan> filteredList = FXCollections.observableArrayList();
-
-    for (Lahan lahan : addLahanList) {
-        // Konversi double ke String
-        String luasString = String.valueOf(lahan.getLuas());
-
-        if (luasString.contains(searchQuery) || 
-            lahan.getLokasi().toLowerCase().contains(searchQuery) ||
-            lahan.getJenisLahan().toLowerCase().contains(searchQuery) || 
-            lahan.getStatusLahan().toLowerCase().contains(searchQuery)) {
-            
-            filteredList.add(lahan);
-        }
-    }
-
-    addLahan_tableView.setItems(filteredList);
-}
-
-
+    addLahan_jenisBibit.setText(String.valueOf(lhn.getJenisBibit()));
     
-
-
-
-
+    // Set image
+if (lhn.getImage() != null && !lhn.getImage().isEmpty()) {
+    String uri = "file:" + lhn.getImage();
+    image = new Image(uri, 131, 130, false, true);
+    addLahan_imageView.setImage(image);
+    getData.path = lhn.getImage(); // Set path untuk update
+} else {
+    addLahan_imageView.setImage(null);
+    getData.path = "";
+    }
+ }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Tambahkan listener untuk seleksi tabel
@@ -471,8 +453,9 @@ private void showAlert(Alert.AlertType type, String title, String content) {
     addLahanShowListData();
     addLahansListStatus();
     addLahansListJenis();
+//    addLahanSearch();
     }    
-    
+       
 // Metode generik untuk beralih halaman
 @FXML
 private void switchScene(ActionEvent event) {
@@ -486,7 +469,33 @@ private void switchScene(ActionEvent event) {
         e.printStackTrace();
     }
 }
-    
+
+@FXML
+private void switchScene2(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPemilik.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+@FXML
+private void switchScene3(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPemilikEdit.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Biodata");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+   
     public void logout(ActionEvent event){
         try{
             
