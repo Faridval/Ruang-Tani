@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
                 if (role.equalsIgnoreCase("Pemilik")) {
                     navigateToDashboard("/View/DahsboardPemilikLahan.fxml", "Dahsboard Pemilik Lahan");
                 } else if (role.equalsIgnoreCase("Pekerja")) {
-                    navigateToDashboard("/View/DashboardPekerja.fxml", "Dashboard Pekerja");
+                    navigateToDashboard("/View/HomePekerja.fxml", "Dashboard Pekerja");
                 } else {
                     showAlert("Role tidak dikenali!");
                 }
@@ -94,10 +94,10 @@ public class LoginController implements Initializable {
     // Method untuk berpindah ke dashboard
     private void navigateToDashboard(String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DahsboardPemilikLahan.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Stage stage = (Stage) login_button.getScene().getWindow(); // Ambil stage saat ini
             stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Dahsboard Pemilik Lahan");
+            stage.setTitle(title);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace(); // Cetak stack trace untuk debugging
