@@ -1,49 +1,29 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Pemilik extends User {
-    private List<Integer> idLahanList;
-
-    public Pemilik() {
-        this.idLahanList = new ArrayList<>();
-    }
-
-    public Pemilik(String username, String password) {
-        super(username, password, null, null);
-        this.idLahanList = new ArrayList<>();
-    }
-
-    public Pemilik(String username, String password, String nama, String alamat) {
-        super(username, password, nama, alamat);
-        this.idLahanList = new ArrayList<>();
+    private int id;
+    
+    public Pemilik(String username, String password, String nama, String alamat, String pemilik) {
+        super(username, password, nama, alamat, "Pemilik"); // Set role sebagai "Pemilik"
     }
 
     public Pemilik(String username, String password, String nama, String alamat, int idPemilik) {
         super(username, password, nama, alamat, idPemilik);
-        this.idLahanList = new ArrayList<>();
+        setRole("Pemilik"); // Set role sebagai "Pemilik"
+    }
+    public Pemilik(int id, String username, String password, String nama, String alamat, String role) {
+        super(username, password, nama, alamat, role); // Panggil konstruktor superclass
+        this.id = id; // Tetapkan ID pemilik
     }
 
-    public List<Integer> getIdLahanList() {
-        return idLahanList;
-    }
-
-    public void addIdLahan(int idLahan) {
-        this.idLahanList.add(idLahan);
-    }
-
-    public void removeIdLahan(int idLahan) {
-        this.idLahanList.remove(Integer.valueOf(idLahan));
+    // Getter dan Setter untuk ID
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
-    public String toString() {
-        return "Pemilik{" +
-                "username='" + getUsername() + '\'' +
-                ", nama='" + getNama() + '\'' +
-                ", alamat='" + getAlamat() + '\'' +
-                ", idLahanList=" + idLahanList +
-                '}';
+    public void setId(int id) {
+        this.id = id;
     }
 }
