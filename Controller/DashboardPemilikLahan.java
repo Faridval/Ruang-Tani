@@ -314,40 +314,39 @@ private void showAlert(Alert.AlertType type, String title, String content) {
     }
     
     //observableList
-    public ObservableList<Lahan> addLahanListData() {
+    public ObservableList<Lahan> addLahanListData(int userId) {
     ObservableList<Lahan> lahanList = FXCollections.observableArrayList();
 
     try {
-        // SQL untuk mengambil data dari tabel "Lahan"
-        String sql = "SELECT * FROM Lahan";
+        // SQL untuk mengambil data berdasarkan ID_Pemilik
+        String sql = "SELECT * FROM Lahan WHERE ID_Pemilik = ?";
 
-        // Menggunakan Statement untuk eksekusi query
-        try (Statement statement = BaseDAO.getConnection().createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-            
-            // Membaca setiap baris hasil query
-            while (resultSet.next()) {
-                Lahan lahan = new Lahan();
-                lahan.setIdLahan(resultSet.getInt("ID_Lahan"));
-                lahan.setStatusLahan(resultSet.getString("Status_lahan"));
-                lahan.setLokasi(resultSet.getString("Lokasi"));
-                lahan.setLuas(resultSet.getDouble("Luas"));
-                lahan.setJenisLahan(resultSet.getString("Jenis_lahan"));
-                lahan.setJenisBibit(resultSet.getString("jenis_bibit"));
-                lahan.setImage(resultSet.getString("image")); // Kolom image sebagai String
-                lahan.setIdPemilik(resultSet.getInt("ID_Pemilik"));
+        try (PreparedStatement preparedStatement = BaseDAO.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, userId);
 
-                // Menambahkan objek Lahan ke dalam ObservableList
-                lahanList.add(lahan);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Lahan lahan = new Lahan();
+                    lahan.setIdLahan(resultSet.getInt("ID_Lahan"));
+                    lahan.setStatusLahan(resultSet.getString("Status_lahan"));
+                    lahan.setLokasi(resultSet.getString("Lokasi"));
+                    lahan.setLuas(resultSet.getDouble("Luas"));
+                    lahan.setJenisLahan(resultSet.getString("Jenis_lahan"));
+                    lahan.setJenisBibit(resultSet.getString("jenis_bibit"));
+                    lahan.setImage(resultSet.getString("image")); // Kolom image sebagai String
+                    lahan.setIdPemilik(resultSet.getInt("ID_Pemilik"));
+
+                    lahanList.add(lahan);
+                }
             }
         }
-
     } catch (SQLException e) {
         e.printStackTrace();
     }
 
-    return lahanList; // Mengembalikan ObservableList berisi daftar lahan
+    return lahanList;
 }
+
 
     @FXML
     public void addLahanDelete(ActionEvent event) {
@@ -393,19 +392,22 @@ private void showAlert(Alert.AlertType type, String title, String content) {
 
     
     private ObservableList<Lahan> addLahanList;
-    public void addLahanShowListData(){
-        addLahanList = addLahanListData();
-        
-        addLahan_tableView.getItems().clear();
-//        sesuaikan dengan yg ada di Lahan.java Model
-        addLahan_tblLokasi.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
-        addLahan_tblLuas.setCellValueFactory(new PropertyValueFactory<>("luas"));
-        addLahan_tblJenis.setCellValueFactory(new PropertyValueFactory<>("jenisLahan"));
-        addLahan_tblStatus.setCellValueFactory(new PropertyValueFactory<>("statusLahan"));
-        addLahan_tblBibit.setCellValueFactory(new PropertyValueFactory<>("jenisBibit"));
-        
-        addLahan_tableView.setItems(addLahanList);
-    } 
+    public void addLahanShowListData() {
+    // Ambil userId dari session
+    int userId = Session.getUserId();
+
+    addLahanList = addLahanListData(userId);
+    addLahan_tableView.getItems().clear();
+
+    addLahan_tblLokasi.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
+    addLahan_tblLuas.setCellValueFactory(new PropertyValueFactory<>("luas"));
+    addLahan_tblJenis.setCellValueFactory(new PropertyValueFactory<>("jenisLahan"));
+    addLahan_tblStatus.setCellValueFactory(new PropertyValueFactory<>("statusLahan"));
+    addLahan_tblBibit.setCellValueFactory(new PropertyValueFactory<>("jenisBibit"));
+
+    addLahan_tableView.setItems(addLahanList);
+}
+
     
     @FXML
     public void addLahansSelect() {
