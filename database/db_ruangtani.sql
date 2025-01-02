@@ -72,6 +72,7 @@ CREATE TABLE `lahan` (
   `Luas` decimal(10,2) DEFAULT NULL,
   `Jenis_lahan` varchar(50) DEFAULT NULL,
   `jenis_bibit` varchar(150) NOT NULL,
+  `image` varchar(500) NOT NULL,
   `ID_Pemilik` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
