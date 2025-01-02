@@ -30,35 +30,56 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User login(String username, String password) {
-        String sqlPemilik = "SELECT * FROM Pemilik WHERE username = ? AND password = ?";
-        String sqlPekerja = "SELECT * FROM Pekerja WHERE username = ? AND password = ?";
+    // Query SQL untuk Pemilik dan Pekerja
+    String sqlPemilik = "SELECT ID_Pemilik, username, password, nama, alamat FROM Pemilik WHERE username = ? AND password = ?";
+    String sqlPekerja = "SELECT ID_Pekerja, username, password, nama, alamat FROM Pekerja WHERE username = ? AND password = ?";
 
-        try (PreparedStatement ps = connection.prepareStatement(sqlPemilik)) {
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new Pemilik(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat"));
+    try {
+        // Cek tabel Pemilik
+        try (PreparedStatement psPemilik = connection.prepareStatement(sqlPemilik)) {
+            psPemilik.setString(1, username);
+            psPemilik.setString(2, password);
+            try (ResultSet rs = psPemilik.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Debug: Found in Pemilik. ID: " + rs.getInt("ID_Pemilik")); // Debugging
+                    return new Pemilik(
+                        rs.getInt("ID_Pemilik"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("nama"),
+                        rs.getString("alamat"),
+                        "Pemilik"
+                    );
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-        try (PreparedStatement ps = connection.prepareStatement(sqlPekerja)) {
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new Pekerja(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat"));
+        // Cek tabel Pekerja
+        try (PreparedStatement psPekerja = connection.prepareStatement(sqlPekerja)) {
+            psPekerja.setString(1, username);
+            psPekerja.setString(2, password);
+            try (ResultSet rs = psPekerja.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Debug: Found in Pekerja. ID: " + rs.getInt("ID_Pekerja")); // Debugging
+                    return new Pekerja(
+                        rs.getInt("ID_Pekerja"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("nama"),
+                        rs.getString("alamat"),
+                        "Pekerja"
+                    );
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace(); // Cetak error jika ada
     }
+
+    System.out.println("Debug: No matching user found."); // Debugging
+    return null; // Tidak ditemukan user
+}
+
 
     @Override
     public void logout(User user) {
@@ -74,12 +95,12 @@ public class UserDAOImpl implements UserDAO {
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sqlPemilik);
             while (rs.next()) {
-                users.add(new Pemilik(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat")));
+                users.add(new Pemilik(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat"), "Pemilik"));
             }
 
             rs = stmt.executeQuery(sqlPekerja);
             while (rs.next()) {
-                users.add(new Pekerja(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat")));
+                users.add(new Pekerja(rs.getString("username"), rs.getString("password"), rs.getString("nama"), rs.getString("alamat"), "Pekerja"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
