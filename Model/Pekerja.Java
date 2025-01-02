@@ -1,64 +1,24 @@
 package model;
 
 public class Pekerja extends User {
-    private int umur;
-    private String pengalaman;
-    private String status;
-
-    public Pekerja() {}
-
-    public Pekerja(String username, String password) {
-        super(username, password, null, null);
+    private int id;
+    public Pekerja(String username, String password, String nama, String alamat, String pekerja) {
+        super(username, password, nama, alamat, "Pekerja"); // Set role sebagai "Pekerja"
     }
 
-    public Pekerja(String username, String password, String nama, String alamat) {
-        super(username, password, nama, alamat);
+    public Pekerja(int id, String username, String password, String nama, String alamat, String role) {
+        super(username, password, nama, alamat, role); // Panggil konstruktor superclass
+        this.id = id; // Tetapkan ID pekerja
     }
 
-    public Pekerja(String username, String password, String nama, String alamat, int umur, String pengalaman, String status) {
-        super(username, password, nama, alamat);
-        this.umur = umur;
-        this.pengalaman = pengalaman;
-        this.status = status;
-    }
-
-    public int getUmur() {
-        return umur;
-    }
-
-    public void setUmur(int umur) {
-        this.umur = umur;
-    }
-
-    public String getPengalaman() {
-        return pengalaman;
-    }
-
-    public void setPengalaman(String pengalaman) {
-        this.pengalaman = pengalaman;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    // Getter dan Setter untuk ID
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
-    public String toString() {
-        return "Pekerja{" +
-                "username='" + getUsername() + '\'' +
-                ", nama='" + getNama() + '\'' +
-                ", alamat='" + getAlamat() + '\'' +
-                ", umur=" + umur +
-                ", pengalaman='" + pengalaman + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
-
-    public String getIdPekerja() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setId(int id) {
+        this.id = id;
     }
 }
