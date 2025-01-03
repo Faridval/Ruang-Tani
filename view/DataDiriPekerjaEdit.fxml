@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="957.0" stylesheets="@../../resources/styles/dahsboardpemiliklahan.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DataDiriPekerjaEditController">
+   <children>
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@../styles/dahsboardpemiliklahan.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="28.0" prefWidth="155.0" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="👤" textAlignment="CENTER" wrappingWidth="148.66665077209473">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" textAlignment="CENTER" wrappingWidth="152.72396278381348">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="18.0" prefWidth="140.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerja" textAlignment="CENTER" wrappingWidth="147.08657455444336">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="155.0" />
+            <Button fx:id="ButtonHome" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchScene" prefHeight="39.0" prefWidth="155.0" styleClass="navbtn" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #b7d5ac;" styleClass="navbtn" text="📋Data Diri" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_KontrakKerja" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchScene2" prefHeight="39.0" prefWidth="155.0" styleClass="navbtn" text="📜Kontrak Kerja" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_Laporan" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene3" prefHeight="43.0" prefWidth="155.0" styleClass="navbtn" text="📋Laporan" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="179.0" prefWidth="155.0" stylesheets="@../styles/dahsboardpemiliklahan.css" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="75.0">
+                     <children>
+                        <Button fx:id="logout_datadiri" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="40.0" styleClass="bg-white" text="🔓 " textFill="#1f691f" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="79.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="155.0" prefHeight="667.0" prefWidth="856.0" style="-fx-alignment: #8FBC8F;">
+         <children>
+            <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+               <children>
+                  <VBox prefHeight="93.0" prefWidth="856.0">
+                     <children>
+                        <Label prefHeight="69.0" prefWidth="626.0" text="DATA DIRI PEKERJA" textFill="DARKSEAGREEN">
+                           <font>
+                              <Font name="Arial Bold" size="35.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="586.0" prefWidth="766.0">
+                     <children>
+                        <HBox prefHeight="587.0" prefWidth="856.0">
+                           <children>
+                              <HBox prefHeight="580.0" prefWidth="1178.0">
+                                 <children>
+                                    <VBox prefHeight="580.0" prefWidth="26.0">
+                                       <children>
+                                          <VBox prefHeight="27.0" prefWidth="559.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="580.0" prefWidth="797.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="Nama_Pekerja" prefHeight="35.0" prefWidth="559.0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow radius="5.135" width="1.54">
+                                                  
+                                                </DropShadow>
+                                             </effect>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor KTP">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="NoKtp_Pekerja" prefHeight="35.0" prefWidth="559.0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow radius="5.135" width="1.54">
+                                                   
+                                                </DropShadow>
+                                             </effect>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alamat">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="Alamat_Pekerja" prefHeight="35.0" prefWidth="559.0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow radius="5.135" width="1.54">
+                                                  
+                                                </DropShadow>
+                                             </effect>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nomor HP">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="NoHP_Pekerja" prefHeight="35.0" prefWidth="518.0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow radius="5.135" width="1.54">
+                                                  
+                                                </DropShadow>
+                                             </effect>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pengalaman/Riwayat Pekerjaan">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <VBox prefHeight="167.0" prefWidth="797.0">
+                                             <children>
+                                                <TextArea fx:id="Pengalaman_Pekerja" prefHeight="155.0" prefWidth="797.0">
+                                                   <effect>
+                                                      <DropShadow radius="6.1125" width="5.45" />
+                                                   </effect></TextArea>
+                                             </children></VBox>
+                                          <Button fx:id="Edit_Pekerja" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="111.0" style="-fx-background-color: #8FBC8F;" text="Edit" textAlignment="CENTER" textFill="WHITE">
+                                             <VBox.margin>
+                                                <Insets left="300.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow>
+                                                 
+                                                </DropShadow>
+                                             </effect>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="580.0" prefWidth="7.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow height="7.0" radius="8.75" width="30.0">
+             
+            </DropShadow>
+         </effect>
+      </VBox>
+   </children>
+</AnchorPane>
