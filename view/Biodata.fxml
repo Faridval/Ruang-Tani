@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: ## 006400006400;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BiodataPekerjaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: ## 006400006400;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BiodataController">
    <top>
-      <VBox prefHeight="51.0" prefWidth="700.0" styleClass="nav-form" stylesheets="@../styles/dahsboardpemiliklahan.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="51.0" prefWidth="700.0" styleClass="nav-form" stylesheets="@Gradasi.css" BorderPane.alignment="CENTER">
          <children>
             <Text fx:id="biodataArea" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="DATA DIRI" textAlignment="CENTER" wrappingWidth="700.3794555664062">
                <font>
@@ -31,7 +31,7 @@
                <font>
                   <Font size="35.0" />
                </font></Text>
-            <Button fx:id="biodata_save" layoutX="310.0" layoutY="349.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #8FBC8F;" text="SAVE" textFill="WHITE">
+            <Button fx:id="biodata_save" layoutX="297.0" layoutY="323.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: #8FBC8F;" text="SAVE" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -42,8 +42,6 @@
             <TextField fx:id="alamat_biodata" layoutX="212.0" layoutY="135.0" prefHeight="25.0" prefWidth="337.0" promptText="Alamat" />
             <TextField fx:id="notelp_biodata" layoutX="212.0" layoutY="179.0" prefHeight="25.0" prefWidth="337.0" promptText="Nomor Telepon" />
             <TextField fx:id="nomorktp_biodata" layoutX="212.0" layoutY="225.0" prefHeight="25.0" prefWidth="337.0" promptText="Nomor KTP" />
-            <TextField fx:id="nomorktp_biodata1" layoutX="212.0" layoutY="267.0" prefHeight="67.0" prefWidth="338.0" promptText="Pengalaman/Riwayat Pekerjaan" />
-            <Text layoutX="175.0" layoutY="287.0" style="-fx-font-size: 20; -fx-fill: DARKSEAGREEN;" text="💼" />
          </children>
       </AnchorPane>
    </center>
