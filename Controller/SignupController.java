@@ -1,15 +1,21 @@
 package Controller;
 
+import Model.Session;
 import dao.UserDAO;
 import dao.UserDAOImpl;
 import model.User;
 import dao.BaseDAO;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -20,11 +26,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import java.sql.Connection;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SignupController implements Initializable {
@@ -77,17 +78,23 @@ public class SignupController implements Initializable {
             return;
         }
 
-        // Pastikan username belum ada di database
+        if (!role.equalsIgnoreCase("Pekerja") && !role.equalsIgnoreCase("Pemilik")) {
+            showAlert("Role tidak valid! Harus 'Pekerja' atau 'Pemilik'.");
+            return;
+        }
+
         try {
+            // Koneksi ke database dan inisialisasi DAO
             Connection connection = BaseDAO.getConnection();
             UserDAO userDAO = new UserDAOImpl(connection);
 
-            if (userDAO.isUsernameExist(username)) { // Tambahkan metode validasi username
+            // Periksa apakah username sudah ada
+            if (userDAO.isUsernameExist(username)) {
                 showAlert("Username sudah terdaftar. Silakan pilih username lain.");
                 return;
             }
 
-            // Insert berdasarkan role
+            // Insert data pengguna baru berdasarkan role
             User newUser = new User(username, password, role, "");
             if ("Pemilik".equals(role)) {
                 userDAO.signUpPemilik(newUser);
@@ -95,18 +102,57 @@ public class SignupController implements Initializable {
                 userDAO.signUpPekerja(newUser);
             }
 
-            showAlert("Pendaftaran berhasil!");
-            clearFields();
+            // Login otomatis setelah signup
+            User user = userDAO.login(username, password);
+            if (user != null) {
+                handleLogin(user);  // Menangani login dan navigasi ke halaman Biodata
+            } else {
+                showAlert("Terjadi kesalahan saat login otomatis.");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
         }
     }
-    
-     @FXML
+
+    private void handleLogin(User user) {
+    // Simpan sesi pengguna
+    Session.setUserId(user.getId());
+    Session.setRole(user.getRole());
+    int currentUserId = user.getId();
+
+    System.out.println("Debug: User ID from login: " + currentUserId);
+    String role = user.getRole();
+    System.out.println("Role pengguna: " + role); // Debug: pastikan role yang didapat adalah 'Pemilik' atau 'Pekerja'
+
+    try {
+        // Navigasi ke halaman Biodata berdasarkan role
+        if (role.equalsIgnoreCase("Pemilik")) {
+            navigateToDashboard("/View/Biodata.fxml", "Biodata Pemilik");
+        } else if (role.equalsIgnoreCase("Pekerja")) {
+            navigateToDashboard("/View/BiodataPekerja.fxml", "Biodata Pekerja");
+        } else {
+            showAlert("Role tidak dikenali!");
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        showAlert("Terjadi kesalahan saat navigasi.");
+    }
+}
+
+
+    private void navigateToDashboard(String fxmlPath, String title) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Stage stage = (Stage) signup_signup.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle(title);
+        stage.show();
+    }
+
+    @FXML
     private void goToLogin() {
         try {
-            // Muat file FXML untuk Login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
             Stage stage = (Stage) signup_hyperLink.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
@@ -116,7 +162,6 @@ public class SignupController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     private void clearFields() {
         signup_username.clear();
