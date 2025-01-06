@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -93,7 +94,7 @@
             <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;">
                 <!-- Detail Lahan -->
                 <HBox alignment="TOP_LEFT" spacing="15">
-                    <ImageView fx:id="lahanImageView" fitHeight="150" fitWidth="150" />
+                    <ImageView fx:id="lahanImageView" fitHeight="200.0" fitWidth="200.0" />
                     <VBox spacing="10">
                         <Label fx:id="namaLahanLabel" style="-fx-font-size: 16px;" text="Nama Lahan:" />
                         <Label fx:id="lokasiLabel" style="-fx-font-size: 16px;" text="Lokasi:" />
@@ -101,18 +102,33 @@
                         <Label fx:id="jenisLahanLabel" style="-fx-font-size: 16px;" text="Jenis Lahan:" />
                         <Label fx:id="jenisBibitLabel" style="-fx-font-size: 16px;" text="Jenis Bibit:" />
                     </VBox>
+                  <HBox alignment="CENTER" prefHeight="200.0" prefWidth="510.0">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="63.0" prefWidth="126.0" text="Button" />
+                     </children>
+                  </HBox>
                 </HBox>
-
-                <!-- Daftar Pekerjaan -->
-                <TableView fx:id="pekerjaanTable" prefHeight="341.0" prefWidth="856.0">
-                    <columns>
-                        <TableColumn fx:id="idPekerjaanColumn" text="ID Pekerjaan" />
-                        <TableColumn fx:id="deskripsiColumn" text="Deskripsi" />
-                        <TableColumn fx:id="lokasiJobColumn" text="Lokasi" />
-                        <TableColumn fx:id="gajiColumn" text="Gaji" />
-                        <TableColumn fx:id="statusKerjaColumn" text="Status Kerja" />
-                    </columns>
-                </TableView>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+      
+                      <!-- Daftar Pekerjaan -->
+                      <TableView fx:id="pekerjaanTable" prefHeight="470.0" prefWidth="856.0">
+                          <columns>
+                              <TableColumn fx:id="deskripsiColumn" prefWidth="130.0" text="Deskripsi" />
+                              <TableColumn fx:id="lokasiJobColumn" prefWidth="150.0" text="Lokasi" />
+                              <TableColumn fx:id="gajiColumn" prefWidth="150.0" text="Gaji" />
+                              <TableColumn fx:id="waktuMulaiColumn" prefWidth="130.0" text="Waktu Mulai" />
+                              <TableColumn fx:id="waktuSelesaiColumn" prefWidth="130.0" text="Waktu Selesai" />
+                              <TableColumn fx:id="jumlahPekerjaColumn" prefWidth="100.0" text="Slot Pekerja" />
+                              <TableColumn fx:id="applyColumn" text="Apply">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="applyButton" />
+                                </cellValueFactory>
+                              </TableColumn>
+                          </columns>
+                      </TableView>
+                  </children>
+               </AnchorPane>
             </VBox>
          </children>
          <effect>
