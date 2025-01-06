@@ -1,0 +1,363 @@
+package Controller;
+
+import Model.Session;
+import com.mysql.cj.protocol.Resultset;
+import dao.BaseDAO;
+import model.Lahan;
+import model.Pekerja;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableCell;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import model.Pemilik;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.text.Text;
+
+public class LaporanPekerjaController {
+
+    private static final Logger LOGGER = Logger.getLogger(LaporanPemilikController.class.getName());
+
+    @FXML
+    private TableView<Lahan> lahanTable;
+
+    @FXML
+    private TableColumn<Lahan, String> namaPemilikColumn;
+
+    @FXML
+    private TableColumn<Lahan, String> lokasiLahanColumn;
+
+    @FXML
+    private TableColumn<Lahan, Void> actionColumn;
+    
+    @FXML
+    private Button button_HomePekerja;
+    
+    @FXML
+    private Button button_DataDiriPekerjaEdit;
+
+    @FXML
+    private Button button_KontrakKerjaPekerja;
+    
+     @FXML
+    private Button button_LaporanPekerja;
+   
+    @FXML
+    private Button logout_Pekerja;
+
+    private final ObservableList<Lahan> lahanList = FXCollections.observableArrayList();
+    
+    private int currentUserId;
+    private Connection connect;
+    private PreparedStatement prepare;
+    private Statement statement;
+    private Resultset result;
+    private int userId;
+    
+    
+    private int idLahan;
+    private int idPemilik;
+    private int idPekerja;
+    
+    public void setData(int idLahan, int idPemilik, int idPekerja) {
+        this.idLahan = idLahan;
+        this.idPemilik = idPemilik;
+        this.idPekerja = idPekerja;
+    }
+    
+    void setUserId(int userId) {
+    this.userId = userId;
+    loadLahanData(userId);
+}
+
+@FXML
+private void initialize(URL url, ResourceBundle rb) {
+    currentUserId = Session.getUserId();
+    if (currentUserId == 0) {
+        LOGGER.warning("ID Pemilik tidak ditemukan di Session.");
+        return;
+    }
+
+    LOGGER.info("ID Pemilik yang login: " + currentUserId);
+
+    lokasiLahanColumn.setCellValueFactory(new PropertyValueFactory<>("lokasi"));
+
+    namaPemilikColumn.setCellValueFactory(cellData ->
+        new SimpleStringProperty(
+            cellData.getValue().getPemilik() != null ? cellData.getValue().getPemilik().getNama() : "Tidak Ada Pemilik"
+        )
+    );
+
+    addActionColumn();
+
+    loadLahanData(currentUserId);
+}
+
+
+private void loadLahanData(int userId) {
+    
+    LOGGER.info("ID Pemilik yang login: " + userId);
+
+    lahanList.clear();
+
+    if (userId == 0) {
+        LOGGER.warning("ID Pemilik yang login tidak valid.");
+        return;
+    }
+
+    try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password")) {
+        String sql = "SELECT l.id_lahan, l.status_lahan, l.lokasi, l.luas, l.jenis_lahan, l.jenis_bibit, " +
+                     "l.image, l.id_pemilik, l.id_pekerja, p.nama as pekerja_nama, pem.nama as pemilik_nama, " +
+                     "pem.nomor_ktp, pem.nomor_hp " +
+                     "FROM lahan l " +
+                     "LEFT JOIN pekerja p ON l.id_pekerja = p.id_pekerja " +
+                     "LEFT JOIN pemilik pem ON l.id_pemilik = pem.id_pemilik " +
+                     "WHERE l.id_pemilik = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int idLahan = rs.getInt("id_lahan");
+                    if (idLahan == 0) {
+                        LOGGER.warning("Ditemukan id_lahan yang bernilai 0, data ini akan dilewati.");
+                        continue;
+                    }
+
+                    String statusLahan = rs.getString("status_lahan");
+                    String lokasi = rs.getString("lokasi");
+                    double luas = rs.getDouble("luas");
+                    String jenisLahan = rs.getString("jenis_lahan");
+                    String jenisBibit = rs.getString("jenis_bibit");
+                    String image = rs.getString("image");
+                    int idPemilik = rs.getInt("id_pemilik");
+                    int idPekerja = rs.getInt("id_pekerja");
+                    String pekerjaNama = rs.getString("pekerja_nama");
+                    
+                    if (idPemilik == 0 || !isPemilikValid(conn, idPemilik)) {
+                        LOGGER.warning("id_pemilik dengan nilai " + idPemilik + " tidak valid, data ini akan dilewati.");
+                        continue;
+                    }
+
+                    Pekerja pekerja = null;
+                    if (idPekerja > 0 && isPekerjaValid(conn, idPekerja)) {
+                        int id_pekerja = 0;
+                        pekerja = new Pekerja(rs.getInt("ID_Pekerja"), "dummy_username", "dummy_password", pekerjaNama, "dummy_alamat", pekerjaNama);
+                    } else if (idPekerja > 0) {
+                        LOGGER.warning("id_pekerja dengan nilai " + idPekerja + " tidak valid, data ini akan dilewati.");
+                    }
+
+                    String pemilikNama = rs.getString("pemilik_nama");
+                    String nomorKtp = rs.getString("nomor_ktp");
+                    String nomorHp = rs.getString("nomor_hp");
+                    Pemilik pemilik = new Pemilik("dummy", "dummy", pemilikNama, "dummy", idPemilik, nomorKtp, nomorHp);
+
+                    Lahan lahan = new Lahan(idLahan, statusLahan, lokasi, luas, jenisLahan, jenisBibit, image, pemilik, pekerja);
+                    lahanList.add(lahan);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        LOGGER.log(Level.SEVERE, "Error loading Lahan data", e);
+    }
+
+    lahanTable.setItems(lahanList);
+}
+
+
+
+    private void addActionColumn() {
+        actionColumn.setCellFactory(param -> new TableCell<Lahan, Void>() {
+            private final Button tambahLaporanButton = new Button("Tambah Laporan");
+            private final Button lihatLaporanButton = new Button("Lihat Laporan");
+
+            {
+                tambahLaporanButton.setOnAction(event -> showTambahLaporan(event));
+                lihatLaporanButton.setOnAction(event -> showLihatLaporan(event));
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(new HBox(10, tambahLaporanButton, lihatLaporanButton));
+                }
+            }
+        });
+    }
+
+    private void showTambahLaporan(javafx.event.ActionEvent event) {
+        try {
+            Lahan selectedLahan = lahanTable.getSelectionModel().getSelectedItem();
+            if (selectedLahan == null) {
+                LOGGER.warning("No Lahan selected");
+                return;
+            }
+
+            int idPekerja = selectedLahan.getPekerja() != null ? selectedLahan.getPekerja().getId() : -1;
+            int idPemilik = selectedLahan.getIdPemilik();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanEdit.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+
+            LaporanEditPemilikController laporanEditController = loader.getController();
+            laporanEditController.setMode("add");
+            laporanEditController.setPekerjaAndPemilik(idPekerja, idPemilik);
+
+            stage.setScene(scene);
+            stage.setTitle("Tambah Laporan");
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error loading Tambah Laporan view", e);
+        }
+    }
+
+private void showLihatLaporan(javafx.event.ActionEvent event) {
+    try {
+        
+        Lahan selectedLahan = lahanTable.getSelectionModel().getSelectedItem();
+            if (selectedLahan == null) {
+                LOGGER.warning("No Lahan selected");
+                return;
+        }
+
+    int idLahan = selectedLahan.getIdLahan();
+    int idPekerja = selectedLahan.getPekerja() != null ? selectedLahan.getPekerja().getId() : -1;
+    int idPemilik = selectedLahan.getIdPemilik();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LihatLaporan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        LaporanPemilikController laporanController = loader.getController();
+        laporanController.setData(idLahan, idPemilik, idPekerja);
+
+        stage.setScene(scene);
+        stage.setTitle("Lihat Laporan");
+        stage.show();
+    } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, "Error loading Lihat Laporan view", e);
+    }
+}
+
+
+    private boolean isPekerjaValid(Connection conn, int idPekerja) {
+        String query = "SELECT COUNT(*) FROM pekerja WHERE id_pekerja = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, idPekerja);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error checking Pekerja validity", e);
+        }
+        return false;
+    }
+
+    private boolean isPemilikValid(Connection conn, int idPemilik) {
+        String query = "SELECT COUNT(*) FROM pemilik WHERE id_pemilik = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, idPemilik);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error checking Pemilik validity", e);
+        }
+        return false;
+    }
+    @FXML
+    private void switchScene5(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePekerja.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+        private void switchScene6(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPekerjaEdit.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+         private void switchScene7(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KontrakKerjaPekerja.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}       @FXML
+    private void switchScene8(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPekerja.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}   @FXML  
+    public void logout(ActionEvent event){
+        try{
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure want to Logout?");
+            Optional<ButtonType> option = alert.showAndWait();
+            
+            if(option.get().equals(ButtonType.OK)){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+                Stage stage = (Stage) logout_Pekerja.getScene().getWindow();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Login");
+                stage.show();
+            }
+            
+            
+            
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+}
+
