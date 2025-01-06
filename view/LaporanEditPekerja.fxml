@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LaporanEditPekerjaController">
+   <children>
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="36.0" prefWidth="155.0" stylesheets="@Gradasi.css" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="👤" textAlignment="CENTER" wrappingWidth="148.66665077209473">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" textAlignment="CENTER" wrappingWidth="152.72396278381348">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerja" textAlignment="CENTER" wrappingWidth="147.08657455444336">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Button fx:id="button_HomePekerja" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchScene5" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_DataDiriPekerjaEdit" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene6" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📋Data Diri" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_KontrakKerjaPekerja" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchScene7" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📜Kontrak Kerja" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_LaporanPekerja" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene8" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #b7d5ac;" text="📋Laporan" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="179.0" prefWidth="155.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="75.0">
+                     <children>
+                        <Button fx:id="logout_Pekerja" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="37.0" styleClass="bg-white" text="🔓 " textFill="#1f691f" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="79.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="155.0" prefHeight="667.0" prefWidth="856.0" style="-fx-alignment: #8FBC8F;">
+         <children>
+            <VBox prefHeight="677.0" prefWidth="818.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+               <children>
+                  <VBox prefHeight="93.0" prefWidth="856.0">
+                     <children>
+                        <Label prefHeight="69.0" prefWidth="626.0" text="LAPORAN EVALUASI" textFill="DARKSEAGREEN">
+                           <font>
+                              <Font name="Arial Bold" size="35.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="586.0" prefWidth="766.0">
+                     <children>
+                        <HBox prefHeight="587.0" prefWidth="856.0">
+                           <children>
+                              <HBox prefHeight="580.0" prefWidth="1178.0">
+                                 <children>
+                                    <VBox prefHeight="580.0" prefWidth="26.0">
+                                       <children>
+                                          <VBox prefHeight="27.0" prefWidth="559.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="580.0" prefWidth="829.0">
+                                       <children>
+                                          <ScrollPane prefHeight="619.0" prefWidth="797.0">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="663.0" prefWidth="781.0">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" prefHeight="667.0" prefWidth="797.0">
+                                                         <children>
+                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hasil :">
+                                                               <font>
+                                                                  <Font name="Arial" size="15.0" />
+                                                               </font>
+                                                            </Text>
+                                                            <TextArea fx:id="textAreaHasil" prefHeight="200.0" prefWidth="200.0" />
+                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Laporan :">
+                                                               <font>
+                                                                  <Font name="Arial" size="15.0" />
+                                                               </font>
+                                                            </Text>
+                                                            <TextArea fx:id="textAreaEvaluasi" prefHeight="200.0" prefWidth="200.0" />
+                                                            <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleTambahEditLaporan" prefHeight="28.0" prefWidth="111.0" style="-fx-background-color: #8FBC8F;" text="Edit" textAlignment="CENTER" textFill="WHITE">
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.6491228342056274" green="0.6491228342056274" blue="0.6491228342056274" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="580.0" prefWidth="7.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow height="7.0" radius="8.75" width="30.0">
+               <color>
+                  <Color red="0.7372549176216125" green="0.6196078658103943" blue="0.6196078658103943" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+   </children>
+</AnchorPane>
