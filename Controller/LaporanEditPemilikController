@@ -1,0 +1,208 @@
+package Controller;
+
+import dao.BaseDAO;
+import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.event.ActionEvent;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+
+public class LaporanEditPemilikController {
+
+    private int idPekerja;
+    private int idPemilik;
+    private String mode;
+
+    @FXML
+    private TextArea textAreaKinerja;
+
+    @FXML
+    private TextArea textAreaEvaluasi;
+
+    @FXML
+    private Button button;
+    
+    @FXML
+    private Button button_kelolaLahan;
+    
+    @FXML
+    private Button button_kelolaPekerjaan;
+
+    @FXML
+    private Button button_laporanPemilik;
+    
+     @FXML
+    private Button button_BiodataPemilik;
+   
+    @FXML
+    private Button logout_pemilik;
+
+    public void setPekerjaAndPemilik(int idPekerja, int idPemilik) {
+        this.idPekerja = idPekerja;
+        this.idPemilik = idPemilik;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+        if ("add".equalsIgnoreCase(mode)) {
+            button.setText("Tambah Laporan");
+        } else if ("edit".equalsIgnoreCase(mode)) {
+            button.setText("Edit Laporan");
+            loadExistingLaporan();
+        }
+    }
+
+    @FXML
+    private void handleTambahEditLaporan(ActionEvent event) {
+        String kinerja = textAreaKinerja.getText();
+        String evaluasi = textAreaEvaluasi.getText();
+
+        if (kinerja.isEmpty() || evaluasi.isEmpty()) {
+            System.out.println("Field kinerja dan evaluasi tidak boleh kosong!");
+            return;
+        }
+
+        if ("add".equalsIgnoreCase(mode)) {
+            saveLaporanToDatabase(kinerja, evaluasi);
+        } else if ("edit".equalsIgnoreCase(mode)) {
+            updateLaporanInDatabase(kinerja, evaluasi);
+        }
+    }
+
+    private void saveLaporanToDatabase(String kinerja, String evaluasi) {
+        String sql = "INSERT INTO laporan (id_pekerja, id_pemilik, kinerja, evaluasi) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idPekerja);
+            pstmt.setInt(2, idPemilik);
+            pstmt.setString(3, kinerja);
+            pstmt.setString(4, evaluasi);
+
+            pstmt.executeUpdate();
+            System.out.println("Laporan berhasil ditambahkan.");
+        } catch (SQLException e) {
+            System.out.println("Terjadi kesalahan saat menambahkan laporan.");
+            e.printStackTrace();
+        }
+    }
+
+    private void updateLaporanInDatabase(String kinerja, String evaluasi) {
+        String sql = "UPDATE laporan SET kinerja = ?, evaluasi = ? WHERE id_pekerja = ? AND id_pemilik = ?";
+
+        try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, kinerja);
+            pstmt.setString(2, evaluasi);
+            pstmt.setInt(3, idPekerja);
+            pstmt.setInt(4, idPemilik);
+
+            pstmt.executeUpdate();
+            System.out.println("Laporan berhasil diperbarui.");
+        } catch (SQLException e) {
+            System.out.println("Terjadi kesalahan saat memperbarui laporan.");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadExistingLaporan() {
+        String sql = "SELECT kinerja, evaluasi FROM laporan WHERE id_pekerja = ? AND id_pemilik = ?";
+
+        try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idPekerja);
+            pstmt.setInt(2, idPemilik);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    textAreaKinerja.setText(rs.getString("kinerja"));
+                    textAreaEvaluasi.setText(rs.getString("evaluasi"));
+                } else {
+                    System.out.println("Tidak ada laporan yang ditemukan untuk ID pekerja: " + idPekerja + " dan ID pemilik: " + idPemilik);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Terjadi kesalahan saat memuat laporan.");
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void switchScene5(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DahsboardPemilikLahan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+        private void switchScene6(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KelolaPekerjaan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+         private void switchScene7(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPemilik.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}       @FXML
+    private void switchScene8(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPemilikEdit.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}   @FXML  
+    public void logout(ActionEvent event){
+        try{
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure want to Logout?");
+            Optional<ButtonType> option = alert.showAndWait();
+            
+            if(option.get().equals(ButtonType.OK)){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+                Stage stage = (Stage) logout_pemilik.getScene().getWindow();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Login");
+                stage.show();
+            }
+                  
+        }catch(Exception e){e.printStackTrace();}
+    }
+}
