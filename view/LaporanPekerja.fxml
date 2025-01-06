@@ -10,13 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LaporanPekerjaController">
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LaporanPekerjaController">
    <children>
-      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@../styles/dahsboardpemiliklahan.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="36.0" prefWidth="155.0" stylesheets="@Gradasi.css" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="👤" textAlignment="CENTER" wrappingWidth="148.66665077209473">
@@ -34,7 +33,7 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Button fx:id="Home_Button" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="Home_Button" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchScene" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -42,7 +41,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="DataDiri_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📋Data Diri" textFill="WHITE">
+            <Button fx:id="DataDiri_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene3" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📋Data Diri" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -50,7 +49,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="KontrakKerja_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📜Kontrak Kerja" textFill="WHITE">
+            <Button fx:id="KontrakKerja_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchScene2" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📜Kontrak Kerja" textFill="WHITE">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -71,7 +70,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="75.0">
                      <children>
-                        <Button fx:id="LogOut_Button" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" styleClass="bg-white" text="🔓 " textFill="#1f691f" />
+                        <Button fx:id="LogOut_Button" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="37.0" styleClass="bg-white" text="🔓 " textFill="#1f691f" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="79.0">
@@ -149,9 +148,7 @@
          </children>
          <effect>
             <DropShadow height="7.0" radius="8.75" width="30.0">
-               <color>
-                  <Color red="0.7372549176216125" green="0.6196078658103943" blue="0.6196078658103943" />
-               </color>
+              
             </DropShadow>
          </effect>
       </VBox>
