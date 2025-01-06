@@ -3,22 +3,34 @@ package model;
 public class Laporan {
     private int idLaporan;
     private String evaluasi;
+    private String kinerja;
     private String hasil;
-    private int idPekerja;
-    private int idPekerjaan;
+    private Pekerja pekerja;
+    private Pekerjaan pekerjaan;
+    private Pemilik pemilik;
+    private Lahan lahan;
 
-    // Constructor
-    public Laporan() {}
-
-    public Laporan(int idLaporan, String evaluasi, String hasil, int idPekerja, int idPekerjaan) {
-        this.idLaporan = idLaporan;
+    public Laporan(Pekerja pekerja, String kinerja, String evaluasi, String hasil, Pemilik pemilik, Pekerjaan pekerjaan, Lahan lahan) {
+        this.pekerja = pekerja;
+        this.kinerja = kinerja;
         this.evaluasi = evaluasi;
         this.hasil = hasil;
-        this.idPekerja = idPekerja;
-        this.idPekerjaan = idPekerjaan;
+        this.pemilik = pemilik;
+        this.pekerjaan = pekerjaan;
+        this.lahan = lahan;
     }
 
-    // Getters and Setters
+    public Laporan(int idLaporan, String evaluasi, String kinerja, String hasil, Pekerja pekerja, Pekerjaan pekerjaan, Pemilik pemilik, Lahan lahan) {
+        this.idLaporan = idLaporan;
+        this.evaluasi = evaluasi;
+        this.kinerja = kinerja;
+        this.hasil = hasil;
+        this.pekerja = pekerja;
+        this.pekerjaan = pekerjaan;
+        this.pemilik = pemilik;
+        this.lahan = lahan;
+    }
+
     public int getIdLaporan() {
         return idLaporan;
     }
@@ -35,6 +47,14 @@ public class Laporan {
         this.evaluasi = evaluasi;
     }
 
+    public String getKinerja() {
+        return kinerja;
+    }
+
+    public void setKinerja(String kinerja) {
+        this.kinerja = kinerja;
+    }
+
     public String getHasil() {
         return hasil;
     }
@@ -43,19 +63,51 @@ public class Laporan {
         this.hasil = hasil;
     }
 
-    public int getIdPekerja() {
-        return idPekerja;
+    public Pekerja getPekerja() {
+        return pekerja;
     }
 
-    public void setIdPekerja(int idPekerja) {
-        this.idPekerja = idPekerja;
+    public void setPekerja(Pekerja pekerja) {
+        this.pekerja = pekerja;
     }
 
-    public int getIdPekerjaan() {
-        return idPekerjaan;
+    public Pekerjaan getPekerjaan() {
+        return pekerjaan;
     }
 
-    public void setIdPekerjaan(int idPekerjaan) {
-        this.idPekerjaan = idPekerjaan;
+    public void setPekerjaan(Pekerjaan pekerjaan) {
+        this.pekerjaan = pekerjaan;
+    }
+
+    public Pemilik getPemilik() {
+        return pemilik;
+    }
+
+    public void setPemilik(Pemilik pemilik) {
+        this.pemilik = pemilik;
+    }
+
+    public Lahan getLahan() {
+        return lahan;
+    }
+
+    public void setLahan(Lahan lahan) {
+        this.lahan = lahan;
+    }
+
+    public String evaluasiPekerja() {
+        return "Evaluasi: " + evaluasi + ", Kinerja: " + kinerja + ", Hasil: " + hasil;
+    }
+
+    public String getDeskripsi() {
+        if (pekerja != null) {
+            return String.format("Nama Pekerja: %s\nNomor KTP: %s\nAlamat: %s\nNomor HP: %s\nEvaluasi: %s\nKinerja: %s\nHasil: %s",
+                pekerja.getNama(), pekerja.getNomorKTP(), pekerja.getAlamat(), pekerja.getNomorHP(), evaluasi, kinerja, hasil);
+        }
+        return "Informasi Pekerja Tidak Tersedia";
+    }
+
+    public String getData() {
+        return String.format("Evaluasi: %s\nKinerja: %s\nHasil: %s", evaluasi, kinerja, hasil);
     }
 }
