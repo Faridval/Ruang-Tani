@@ -71,11 +71,18 @@ public class LaporanPemilikController {
     private PreparedStatement prepare;
     private Statement statement;
     private Resultset result;
-
-    public LaporanPemilikController() {
-    }
     private int userId;
     
+    
+    private int idLahan;
+    private int idPemilik;
+    private int idPekerja;
+    
+    public void setData(int idLahan, int idPemilik, int idPekerja) {
+        this.idLahan = idLahan;
+        this.idPemilik = idPemilik;
+        this.idPekerja = idPekerja;
+    }
     
     void setUserId(int userId) {
     this.userId = userId;
@@ -214,7 +221,7 @@ private void loadLahanData(int userId) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(loader.load());
 
-            LaporanEditController laporanEditController = loader.getController();
+            LaporanEditPemilikController laporanEditController = loader.getController();
             laporanEditController.setMode("add");
             laporanEditController.setPekerjaAndPemilik(idPekerja, idPemilik);
 
@@ -226,17 +233,34 @@ private void loadLahanData(int userId) {
         }
     }
 
-    private void showLihatLaporan(javafx.event.ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LihatLaporan.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Lihat Laporan");
-            stage.show();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error loading Lihat Laporan view", e);
+private void showLihatLaporan(javafx.event.ActionEvent event) {
+    try {
+        
+        Lahan selectedLahan = lahanTable.getSelectionModel().getSelectedItem();
+            if (selectedLahan == null) {
+                LOGGER.warning("No Lahan selected");
+                return;
         }
+
+    int idLahan = selectedLahan.getIdLahan();
+    int idPekerja = selectedLahan.getPekerja() != null ? selectedLahan.getPekerja().getId() : -1;
+    int idPemilik = selectedLahan.getIdPemilik();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LihatLaporan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        LaporanPemilikController laporanController = loader.getController();
+        laporanController.setData(idLahan, idPemilik, idPekerja);
+
+        stage.setScene(scene);
+        stage.setTitle("Lihat Laporan");
+        stage.show();
+    } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, "Error loading Lihat Laporan view", e);
     }
+}
+
 
     private boolean isPekerjaValid(Connection conn, int idPekerja) {
         String query = "SELECT COUNT(*) FROM pekerja WHERE id_pekerja = ?";
@@ -327,8 +351,7 @@ private void loadLahanData(int userId) {
                 stage.setScene(new Scene(loader.load()));
                 stage.setTitle("Login");
                 stage.show();
-            }
+            } 
         }catch(Exception e){e.printStackTrace();}
     }
 }
-
