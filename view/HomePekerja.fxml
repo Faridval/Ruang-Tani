@@ -2,94 +2,91 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@Gradasi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DashboardPemilikLahanController">
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1014.0" styleClass="nav-form" stylesheets="@../styles/dahsboardpemiliklahan.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomePekerjaController">
    <children>
       <VBox prefHeight="667.0" prefWidth="155.0" styleClass="nav-form" stylesheets="@Gradasi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+            <VBox prefHeight="28.0" prefWidth="155.0" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="👤" textAlignment="CENTER" wrappingWidth="148.66665077209473">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" textAlignment="CENTER" wrappingWidth="152.72396278381348">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerja" textAlignment="CENTER" wrappingWidth="147.08657455444336">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="25.0" prefWidth="155.0" />
+            <Button fx:id="Home_Button" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="41.0" prefWidth="155.0" style="-fx-background-color: #b7d5ac;" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
                <padding>
-                  <Insets left="50.0" />
+                  <Insets left="20.0" />
                </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="Datadiri_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📋Data Diri" textAlignment="CENTER" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="KontrakKerja_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📜Kontrak Kerja" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="Laporan_Button" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="📋Laporan" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="179.0" prefWidth="155.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="109.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Gambar_WhatsApp_2024-11-02_pukul_22.26.01_edac9a93-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-               <effect>
-                  <DropShadow height="7.0" radius="8.75" width="30.0">
-                     <color>
-                        <Color red="0.7372549176216125" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Pane>
-            <HBox prefHeight="36.0" prefWidth="155.0">
-               <children>
-                  <Button prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: transparent; -fx-text-fill: WHITE;" text="PEKERJA" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="23.0" />
-                     </font></Button>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="75.0">
+                     <children>
+                        <Button fx:id="Logout_Button" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" styleClass="bg-white" text="🔓 " textFill="#1f691f" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="79.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="59.0" prefWidth="162.0" style="-fx-background-color: #b7d5ac;" text="🏠 Home" textAlignment="CENTER" textFill="WHITE">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="☻Data Diri" textAlignment="CENTER" textFill="WHITE">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="✎Kontrak Kerja" textFill="WHITE">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="⎙Laporan" textFill="WHITE">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="256.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="316.0" styleClass="navbtn" stylesheets="@Gradasi.css" text="🔓 Logout" textFill="WHITE">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
          </children>
       </VBox>
       <VBox layoutX="155.0" prefHeight="667.0" prefWidth="856.0" style="-fx-alignment: #8FBC8F;">
@@ -100,7 +97,7 @@
                      <children>
                         <HBox prefHeight="67.0" prefWidth="830.0">
                            <children>
-                              <TextField focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="669.0" promptText="Search" style="-fx-background-radius: 50;" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="Search_Button" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="669.0" promptText="Search" style="-fx-background-radius: 50;" HBox.hgrow="ALWAYS">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -120,48 +117,18 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox prefHeight="67.0" prefWidth="351.0">
-                           <children>
-                              <HBox prefHeight="67.0" prefWidth="175.0">
-                                 <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="170.0" style="-fx-background-color: #8FBC8F; -fx-background-radius: 30;" text="🔔" textAlignment="CENTER" textFill="WHITE">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                       <effect>
-                                          <DropShadow height="18.5" radius="9.125" width="20.0">
-                                             <color>
-                                                <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                             </color>
-                                          </DropShadow>
-                                       </effect>
-                                    </Button>
-                                 </children>
-                                 <effect>
-                                    <DropShadow height="18.5" radius="9.125" width="20.0">
-                                       <color>
-                                          <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </HBox>
-                           </children>
-                        </HBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="602.0" prefWidth="856.0">
                      <children>
-                        <VBox prefHeight="600.0" prefWidth="679.0">
+                        <VBox prefHeight="600.0" prefWidth="855.0">
                            <children>
-                              <HBox prefHeight="165.0" prefWidth="660.0" style="-fx-background-color: #eaa763; -fx-background-radius: 25;">
+                              <HBox prefHeight="179.0" prefWidth="799.0" style="-fx-background-color: #eaa763; -fx-background-radius: 25;">
                                  <VBox.margin>
-                                    <Insets bottom="15.0" left="10.0" />
+                                    <Insets bottom="15.0" left="10.0" right="10.0" />
                                  </VBox.margin>
                                  <children>
-                                    <HBox prefHeight="179.0" prefWidth="547.0">
+                                    <HBox alignment="CENTER" prefHeight="179.0" prefWidth="645.0">
                                        <children>
                                           <VBox prefHeight="179.0" prefWidth="489.0">
                                              <children>
@@ -169,7 +136,7 @@
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="55.0" prefWidth="489.0" text="Hello! Welcome to RuangTani">
                                                          <font>
-                                                            <Font name="System Bold" size="24.0" />
+                                                            <Font name="System Bold" size="31.0" />
                                                          </font>
                                                          <padding>
                                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -184,7 +151,7 @@
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="54.0" prefWidth="485.0" text="Let's Start Your Work Here!">
                                                          <font>
-                                                            <Font name="System Bold" size="17.0" />
+                                                            <Font name="System Bold" size="27.0" />
                                                          </font>
                                                          <padding>
                                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -195,18 +162,7 @@
                                                       </Label>
                                                    </children>
                                                 </VBox>
-                                                <VBox prefHeight="46.0" prefWidth="481.0">
-                                                   <children>
-                                                      <Button alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefHeight="39.0" prefWidth="423.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="New Job +" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="18.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets left="30.0" />
-                                                         </VBox.margin>
-                                                      </Button>
-                                                   </children>
-                                                </VBox>
+                                                <VBox prefHeight="9.0" prefWidth="489.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -225,350 +181,26 @@
                                     </DropShadow>
                                  </effect>
                               </HBox>
-                              <HBox prefHeight="414.0" prefWidth="679.0">
+                              <HBox prefHeight="419.0" prefWidth="661.0">
                                  <children>
-                                    <VBox prefHeight="405.0" prefWidth="678.0">
+                                    <VBox alignment="CENTER" prefHeight="405.0" prefWidth="854.0">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="411.0" prefWidth="427.0">
-                                             <children>
-                                                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="381.0" prefWidth="180.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
-                                                   <effect>
-                                                      <DropShadow height="18.5" radius="9.125" width="20.0">
-                                                         <color>
-                                                            <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                                         </color>
-                                                      </DropShadow>
-                                                   </effect>
-                                                   <HBox.margin>
+                                          <ScrollPane fitToWidth="true" prefHeight="405.0" prefWidth="845.0">
+                                             <content>
+                                                <VBox fx:id="lahanContainer" alignment="CENTER" spacing="10.0">
+                                                   <padding>
                                                       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                   </HBox.margin>
-                                                   <children>
-                                                      <VBox prefHeight="96.0" prefWidth="117.0">
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" left="3.0" right="10.0" top="10.0" />
-                                                         </VBox.margin>
-                                                         <children>
-                                                            <ImageView fitHeight="83.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@1231.jpg_wh1200.jpg" />
-                                                               </image>
-                                                               <VBox.margin>
-                                                                  <Insets left="25.0" />
-                                                               </VBox.margin>
-                                                            </ImageView>
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox prefHeight="250.0" prefWidth="163.0">
-                                                         <children>
-                                                            <Hyperlink text="Lahan Pak Aris" textAlignment="CENTER">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="25.0" />
-                                                               </VBox.margin>
-                                                            </Hyperlink>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="📍 : Solo, Jawa Tengah">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="💵 : 2-3 juta/bulan" wrappingWidth="180.16192626953125">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text layoutX="10.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⏰ : 2-3 bulan">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerjaan tersedia:">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text layoutX="10.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menanam, Menyiram, Memberi pupuk, Merawat" wrappingWidth="171.59051513671875">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                         </children>
-                                                      </VBox>
-                                                      <Text opacity="0.49" strokeType="OUTSIDE" strokeWidth="0.0" text="🧑‍🌾:5/6 pekerja" textAlignment="CENTER" wrappingWidth="179.3333740234375" />
-                                                   </children>
+                                                   </padding>
                                                 </VBox>
-                                                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="381.0" prefWidth="181.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
-                                                   <HBox.margin>
-                                                      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                   </HBox.margin>
-                                                   <effect>
-                                                      <DropShadow height="18.5" radius="9.125" width="20.0">
-                                                         <color>
-                                                            <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                                         </color>
-                                                      </DropShadow>
-                                                   </effect>
-                                                   <children>
-                                                      <VBox prefHeight="95.0" prefWidth="110.0">
-                                                         <children>
-                                                            <ImageView fitHeight="84.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                                                               <VBox.margin>
-                                                                  <Insets left="20.0" />
-                                                               </VBox.margin>
-                                                               <image>
-                                                                  <Image url="@1-memanfaatkan-lahan-kosong.jpg" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </VBox.margin>
-                                                      </VBox>
-                                                      <VBox prefHeight="250.0" prefWidth="181.0">
-                                                         <children>
-                                                            <Hyperlink prefHeight="24.0" prefWidth="182.0" text="Lahan Pak Robert" textAlignment="CENTER">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="25.0" />
-                                                               </VBox.margin>
-                                                            </Hyperlink>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="📍 : Jayapura, Papua">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="💵 : 5-6 juta/bulan">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="⏰ : 1-2 bulan">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerjaan tersedia:">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menanam, Menyiram, Memberi pupuk" wrappingWidth="173.59054565429688">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                         </children>
-                                                      </VBox>
-                                                      <Text opacity="0.49" strokeType="OUTSIDE" strokeWidth="0.0" text="🧑‍🌾: 2/10 pekerja" textAlignment="CENTER" wrappingWidth="179.3333740234375" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="381.0" prefWidth="179.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
-                                                   <HBox.margin>
-                                                      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                   </HBox.margin>
-                                                   <effect>
-                                                      <DropShadow height="18.5" radius="9.125" width="20.0">
-                                                         <color>
-                                                            <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                                         </color>
-                                                      </DropShadow>
-                                                   </effect>
-                                                   <children>
-                                                      <VBox prefHeight="95.0" prefWidth="112.0">
-                                                         <children>
-                                                            <ImageView fitHeight="82.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                                               <VBox.margin>
-                                                                  <Insets left="25.0" />
-                                                               </VBox.margin>
-                                                               <image>
-                                                                  <Image url="@lahan.jpg" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </VBox.margin>
-                                                      </VBox>
-                                                      <VBox prefHeight="247.0" prefWidth="184.0">
-                                                         <children>
-                                                            <Hyperlink prefHeight="24.0" prefWidth="176.0" text="Kebun Pak Syakur" textAlignment="CENTER">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="25.0" />
-                                                               </VBox.margin>
-                                                            </Hyperlink>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="📍 : Tebet, Jakarta" wrappingWidth="178.42529296875">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="💵 : 20-30 juta/bulan">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="⏰ : 1-2 tahun">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pekerjaan tersedia:">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menanam, Menyiram, Memberi pupuk, Merawat, Memanen, Distribusi, Pengemasan" wrappingWidth="172.92385864257812">
-                                                               <font>
-                                                                  <Font name="Arial" size="15.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                         </children>
-                                                      </VBox>
-                                                      <Text opacity="0.49" strokeType="OUTSIDE" strokeWidth="0.0" text="⚠Maaf, lahan ini sudah full" textAlignment="CENTER" wrappingWidth="179.3333740234375" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets bottom="10.0" />
-                                             </VBox.margin>
-                                          </HBox>
+                                             </content>
+                                          </ScrollPane>
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #8FBC8F; -fx-background-radius: 25;" stylesheets="@Gradasi.css">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
-                           </HBox.margin>
-                           <effect>
-                              <DropShadow height="18.5" radius="9.125" width="20.0">
-                                 <color>
-                                    <Color red="0.6228070259094238" green="0.6170402765274048" blue="0.6170402765274048" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                           <children>
-                              <VBox prefHeight="44.0" prefWidth="166.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="55.0" prefWidth="489.0" style="-fx-background-color: #eaa763;" text="Projects" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="24.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="116.0" prefWidth="166.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: white; -fx-background-radius: 25;" text="Active" textFill="DARKSEAGREEN">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pak Aris, Jakarta" textAlignment="CENTER" wrappingWidth="164.0130615234375">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: white; -fx-background-radius: 25;" text="Finished" textFill="DARKSEAGREEN">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pak Bambang, Solo" textAlignment="CENTER" wrappingWidth="158.0130615234375">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Text>
-                                    <Text fill="WHITE" layoutX="10.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pak Rudi, Karawang" textAlignment="CENTER" wrappingWidth="164.0130615234375">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Text>
-                                 </children>
-                              </VBox>
                            </children>
                         </VBox>
                      </children>
