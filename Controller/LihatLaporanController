@@ -1,0 +1,236 @@
+package controller;
+
+import Model.Session;
+import dao.BaseDAO;
+import java.io.IOException;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.util.Pair;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+
+public class LihatLaporanController {
+
+    private static final Logger LOGGER = Logger.getLogger(LihatLaporanController.class.getName());
+
+    @FXML
+    private TableView<Pair<String, String>> laporanTable;
+
+    @FXML
+    private TableColumn<Pair<String, String>, String> columnDeskripsi;
+
+    @FXML
+    private TableColumn<Pair<String, String>, String> columnData;
+
+    @FXML
+    private TableView<Pair<String, String>> evaluasitable;
+
+    @FXML
+    private TableColumn<Pair<String, String>, String> columnDeskripsiEvaluasi;
+
+    @FXML
+    private TableColumn<Pair<String, String>, String> columnDataEvaluasi;
+    
+    @FXML
+    private Button button_kelolaLahan;
+    
+    @FXML
+    private Button button_kelolaPekerjaan;
+
+    @FXML
+    private Button button_laporanPemilik;
+    
+     @FXML
+    private Button button_BiodataPemilik;
+   
+    @FXML
+    private Button logout_pemilik;
+
+    private int currentUserId;
+
+
+    public void setUserId(int userId) {
+        this.currentUserId = userId;
+        loadLaporanData(currentUserId);
+        loadEvaluasiData(currentUserId);
+    }
+
+    @FXML
+    private void initialize() {
+        currentUserId = Session.getUserId();
+
+        if (currentUserId == 0) {
+            LOGGER.warning("ID Pemilik tidak ditemukan di Session.");
+            return;
+        }
+
+        LOGGER.info("ID Pemilik yang login: " + currentUserId);
+
+        columnDeskripsi.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
+        columnData.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getValue() != null ? cellData.getValue().getValue() : "-"
+        ));
+
+        columnDeskripsiEvaluasi.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
+        columnDataEvaluasi.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getValue() != null ? cellData.getValue().getValue() : "-"
+        ));
+
+        loadLaporanData(currentUserId);
+        loadEvaluasiData(currentUserId);
+    }
+
+    private void loadLaporanData(int userId) {
+        LOGGER.info("Memuat data laporan untuk ID Pemilik: " + userId);
+
+        ObservableList<Pair<String, String>> laporanList = FXCollections.observableArrayList();
+
+        try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password")) {
+            String sql = "SELECT p.nama AS pekerja_nama, p.nomor_ktp, p.alamat, p.nomor_hp, " +
+                         "lha.lokasi, lha.jenis_lahan, f.nama_barang, f.satuan, " +
+                         "pkj.deskripsi AS pekerjaan_deskripsi, l.hasil, l.laporan " +
+                         "FROM laporan l " +
+                         "LEFT JOIN lahan lha ON l.id_lahan = lha.id_lahan " +
+                         "LEFT JOIN pekerja p ON lha.id_pekerja = p.id_pekerja " +
+                         "LEFT JOIN fasilitas_pekerja f ON f.id_pekerja = p.id_pekerja " +
+                         "LEFT JOIN pekerjaan pkj ON pkj.id_pekerjaan = l.id_pekerjaan " +
+                         "WHERE l.id_user = ?"; 
+
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, userId); 
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        laporanList.add(new Pair<>("Nama Pekerja", rs.getString("pekerja_nama")));
+                        laporanList.add(new Pair<>("Nomor KTP", rs.getString("nomor_ktp")));
+                        laporanList.add(new Pair<>("Alamat Pekerja", rs.getString("alamat")));
+                        laporanList.add(new Pair<>("Nomor HP", rs.getString("nomor_hp")));
+                        laporanList.add(new Pair<>("Lokasi Lahan", rs.getString("lokasi")));
+                        laporanList.add(new Pair<>("Jenis Lahan", rs.getString("jenis_lahan")));
+                        laporanList.add(new Pair<>("Fasilitas", rs.getString("nama_barang") + " (" + rs.getString("satuan") + ")"));
+                        laporanList.add(new Pair<>("Pekerjaan", rs.getString("pekerjaan_deskripsi")));
+                        laporanList.add(new Pair<>("Total Panen", rs.getString("hasil")));
+                        laporanList.add(new Pair<>("Laporan", rs.getString("laporan")));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        laporanTable.setItems(laporanList);
+    }
+
+    private void loadEvaluasiData(int userId) {
+        LOGGER.info("Memuat data evaluasi untuk ID Pemilik: " + userId);
+
+        ObservableList<Pair<String, String>> evaluasiList = FXCollections.observableArrayList();
+
+        try (Connection conn = BaseDAO.getConnection("jdbc:mysql://localhost:3306/nama_database", "username", "password")) {
+            String sql = "SELECT p.nama, p.nomor_ktp, p.alamat, p.nomor_hp, lha.lokasi, pkj.deskripsi AS pekerjaan_deskripsi, l.kinerja, l.evaluasi " +
+                         "FROM pemilik p " +
+                         "JOIN lahan lha ON p.id_pemilik = lha.id_pemilik " +
+                         "JOIN laporan l ON l.id_lahan = lha.id_lahan " +
+                         "JOIN pekerjaan pkj ON pkj.id_pekerjaan = l.id_pekerjaan " +
+                         "WHERE l.id_user = ?";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, userId);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        evaluasiList.add(new Pair<>("Nama Pemilik", rs.getString("nama")));
+                        evaluasiList.add(new Pair<>("Nomor KTP", rs.getString("nomor_ktp")));
+                        evaluasiList.add(new Pair<>("Alamat", rs.getString("alamat")));
+                        evaluasiList.add(new Pair<>("Nomor HP", rs.getString("nomor_hp")));
+                        evaluasiList.add(new Pair<>("Lokasi Lahan", rs.getString("lokasi")));
+                        evaluasiList.add(new Pair<>("Deskripsi Pekerjaan", rs.getString("pekerjaan_deskripsi")));
+                        evaluasiList.add(new Pair<>("Kinerja Pekerja", rs.getString("kinerja")));
+                        evaluasiList.add(new Pair<>("Evaluasi Pekerja", rs.getString("evaluasi")));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        evaluasitable.setItems(evaluasiList);
+    }
+    @FXML
+    private void switchScene5(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DahsboardPemilikLahan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+        private void switchScene6(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KelolaPekerjaan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}@FXML
+         private void switchScene7(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPemilik.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}       @FXML
+    private void switchScene8(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPemilikEdit.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Laporan Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}   @FXML  
+    public void logout(ActionEvent event){
+        try{
+            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure want to Logout?");
+            Optional<ButtonType> option = alert.showAndWait();
+            
+            if(option.get().equals(ButtonType.OK)){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+                Stage stage = (Stage) logout_pemilik.getScene().getWindow();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Login");
+                stage.show();
+            }   
+        }catch(Exception e){e.printStackTrace();}
+    }
+}
