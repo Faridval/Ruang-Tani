@@ -1,0 +1,99 @@
+package Controller;
+
+import Model.Session;
+import model.Pekerjaan;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import dao.BaseDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class KontrakKerjaPekerjaController {
+
+    @FXML
+    private TableView<Pekerjaan> pekerjaanTable;
+    @FXML
+    private TableColumn<Pekerjaan, String> deskripsiPekerjaan;
+    @FXML
+    private TableColumn<Pekerjaan, Double> gaji;
+    @FXML
+    private TableColumn<Pekerjaan, String> lokasi;
+    @FXML
+    private TableColumn<Pekerjaan, String> waktuMulai;
+    @FXML
+    private TableColumn<Pekerjaan, String> waktuSelesai;
+    @FXML
+    private TableColumn<Pekerjaan, String> status;
+
+    private int idPekerja; // ID Pekerja dari sesi pengguna
+
+    @FXML
+    public void initialize() {
+        // Mengambil ID pekerja dari sesi
+        this.idPekerja = Session.getUserId();
+        System.out.println("ID Pekerja di initialize: " + idPekerja);
+
+        // Validasi ID pekerja sebelum memuat data
+        if (idPekerja <= 0) {
+            System.err.println("ID Pekerja tidak valid!");
+            return;
+        }
+
+        // Mengatur cell value factories agar sesuai dengan properti model Pekerjaan
+        deskripsiPekerjaan.setCellValueFactory(new PropertyValueFactory<>("deskripsi"));
+        gaji.setCellValueFactory(new PropertyValueFactory<>("gaji"));
+        lokasi.setCellValueFactory(new PropertyValueFactory<>("lokasiJob"));
+        waktuMulai.setCellValueFactory(new PropertyValueFactory<>("waktuMulai"));
+        waktuSelesai.setCellValueFactory(new PropertyValueFactory<>("waktuSelesai"));
+        status.setCellValueFactory(new PropertyValueFactory<>("statusApplied"));
+
+        // Memuat data pekerjaan yang telah di-apply oleh pekerja
+        loadPekerjaanData();
+    }
+
+    private void loadPekerjaanData() {
+        String appliedPekerjaanQuery = "SELECT pekerjaan.*, applied_pekerjaan.Status AS applied_status " +
+                "FROM applied_pekerjaan " +
+                "JOIN pekerjaan ON applied_pekerjaan.ID_Pekerjaan = pekerjaan.ID_Pekerjaan " +
+                "WHERE applied_pekerjaan.ID_Pekerja = ?";
+
+        ObservableList<Pekerjaan> pekerjaanList = FXCollections.observableArrayList();
+
+        try (Connection connection = BaseDAO.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(appliedPekerjaanQuery)) {
+
+            preparedStatement.setInt(1, idPekerja);
+            System.out.println("Query: " + preparedStatement.toString());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                System.out.println("Data ditemukan: " + resultSet.getString("deskripsi"));
+                Pekerjaan pekerjaan = new Pekerjaan(
+                        resultSet.getInt("ID_Pekerjaan"),
+                        resultSet.getString("deskripsi"),
+                        resultSet.getDouble("Gaji"),
+                        resultSet.getString("Lokasi_Job"),
+                        resultSet.getDate("Waktu_mulai").toLocalDate(),
+                        resultSet.getDate("Waktu_Selesai").toLocalDate(),
+                        resultSet.getString("applied_status")  // Status dari tabel applied_pekerjaan
+                );
+                pekerjaanList.add(pekerjaan);
+            }
+
+            System.out.println("Jumlah data ditemukan: " + pekerjaanList.size());
+        } catch (SQLException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // Menampilkan data ke dalam TableView
+        pekerjaanTable.setItems(pekerjaanList);
+    }
+}
