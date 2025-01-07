@@ -46,19 +46,19 @@
                         <Font name="MS Reference Sans Serif" size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="button_kelolaPekerjaan" layoutX="7.0" layoutY="197.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Kelola Lahan" textFill="#eeecec">
+                  <Button fx:id="button_kelolaLahan" layoutX="7.0" layoutY="197.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Kelola Lahan" textFill="#eeecec">
                      <graphic>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="⚙" />
                      </graphic></Button>
-                  <Button layoutX="7.0" layoutY="236.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text=" Kelola Pekerjaan" textFill="WHITE">
+                  <Button fx:id="button_kelolaPekerjaan" layoutX="7.0" layoutY="236.0" mnemonicParsing="false" onAction="#switchScene2" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text=" Kelola Pekerjaan" textFill="WHITE">
                      <graphic>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="⚙" />
                      </graphic></Button>
-                  <Button layoutX="7.0" layoutY="275.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Laporan" textFill="WHITE">
+                  <Button fx:id="button_LaporanPemilik" layoutX="7.0" layoutY="275.0" mnemonicParsing="false" onAction="#switchScene3" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Laporan" textFill="WHITE">
                      <graphic>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="📋" />
                      </graphic></Button>
-                  <Button layoutX="7.0" layoutY="314.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Biodata" textFill="WHITE">
+                  <Button fx:id="button_BiodataPemilik" layoutX="7.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchScene4" prefHeight="39.0" prefWidth="185.0" styleClass="navbtn" stylesheets="@../styles/dahsboardpemiliklahan.css" text="Biodata" textFill="WHITE">
                      <graphic>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="📋" />
                      </graphic></Button>
@@ -84,16 +84,15 @@
                            <columns>
                               <TableColumn fx:id="namaPekerja" prefWidth="130.0" text="Nama" />
                               <TableColumn fx:id="alamatPekerja" prefWidth="100.0" text="Alamat" />
-                              <TableColumn fx:id="noKTP" prefWidth="120.0" text="No KTP" />
+                              <TableColumn fx:id="noKTP" prefWidth="150.0" text="No KTP" />
                               <TableColumn fx:id="noHP" prefWidth="120.0" text="No HP" />
-                              <TableColumn fx:id="keterampilan" prefWidth="130.0" text="Keterampilan" />
-                              <TableColumn fx:id="riwayatPekerjaan" prefWidth="100.0" text="Riwayat Pekerjaan" />
-                              <TableColumn fx:id="accept" text="Accept">
+                              <TableColumn fx:id="riwayatPekerjaan" prefWidth="150.0" text="Riwayat Pekerjaan" />
+                              <TableColumn fx:id="accept" prefWidth="100.0" text="Accept">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="acceptButton" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="reject" text="Reject">
+                              <TableColumn fx:id="reject" prefWidth="100.0" text="Reject">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="rejectButton" />
                                  </cellValueFactory>
