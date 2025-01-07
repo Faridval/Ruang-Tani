@@ -6,17 +6,19 @@ public class User {
     private String password;
     private String nama;
     private String alamat;
+    String role; // Tambahkan atribut role
 
+    // Constructor
     public User() {}
 
-    public User( String username, String password, String nama, String alamat) {
+    public User(String username, String password, String nama, String alamat) {
         this.username = username;
         this.password = password;
         this.nama = nama;
         this.alamat = alamat;
     }
-    
-    public User( String username, String password, String nama, String alamat, int id) {
+
+    public User(String username, String password, String nama, String alamat, int id) {
         this.username = username;
         this.password = password;
         this.nama = nama;
@@ -24,6 +26,16 @@ public class User {
         this.id = id;
     }
 
+    // Constructor dengan role
+    public User(String username, String password, String nama, String alamat, String role) {
+        this.username = username;
+        this.password = password;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.role = role; // Inisialisasi role
+    }
+
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -65,6 +77,10 @@ public class User {
     }
 
     public String getRole() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
