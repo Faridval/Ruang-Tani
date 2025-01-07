@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Session;
 import dao.BaseDAO;
+import java.io.IOException;
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,13 +20,23 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 import javafx.util.Callback;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 
 public class DetailLahanController {
@@ -77,7 +89,24 @@ public class DetailLahanController {
     
     @FXML
     private TableColumn<Pekerjaan, Void> applyColumn;
+    
+    @FXML
+    private Button Datadiri_Button;
 
+    @FXML
+    private Button Home_Button;
+
+    @FXML
+    private Button KontrakKerja_Button;
+
+    @FXML
+    private Button Laporan_Button;
+
+    @FXML
+    private Button Logout_Button;
+    
+    @FXML
+    private Hyperlink kembali_Button;
 
     private int idLahan;
 
@@ -161,65 +190,174 @@ public class DetailLahanController {
     }
 
 
-    private void loadPekerjaanData() {
-        String getPemilikQuery = "SELECT ID_Pemilik FROM lahan WHERE ID_Lahan = ?";
-        String pekerjaanQuery = "SELECT * FROM pekerjaan WHERE ID_Pemilik = ?";
+private void loadPekerjaanData() {
+    String getPemilikQuery = "SELECT ID_Pemilik FROM lahan WHERE ID_Lahan = ?";
+    String pekerjaanQuery = "SELECT * FROM pekerjaan WHERE ID_Pemilik = ?";
 
-        try (Connection connection = BaseDAO.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getPemilikQuery)) {
+    try (Connection connection = BaseDAO.getConnection();
+         PreparedStatement pemilikStatement = connection.prepareStatement(getPemilikQuery)) {
 
-            // Mengambil ID_Pemilik berdasarkan ID_Lahan
-            preparedStatement.setInt(1, idLahan);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                int idPemilik = resultSet.getInt("ID_Pemilik");
+        // Mengambil ID_Pemilik berdasarkan ID_Lahan
+        pemilikStatement.setInt(1, idLahan);
+        try (ResultSet pemilikResultSet = pemilikStatement.executeQuery()) {
+            if (pemilikResultSet.next()) {
+                int idPemilik = pemilikResultSet.getInt("ID_Pemilik");
 
                 // Mengambil pekerjaan berdasarkan ID_Pemilik
                 try (PreparedStatement pekerjaanStatement = connection.prepareStatement(pekerjaanQuery)) {
                     pekerjaanStatement.setInt(1, idPemilik);
-                    ResultSet pekerjaanResultSet = pekerjaanStatement.executeQuery();
+                    try (ResultSet pekerjaanResultSet = pekerjaanStatement.executeQuery()) {
 
-                    List<Pekerjaan> pekerjaanList = new ArrayList<>();
-                    while (pekerjaanResultSet.next()) {
-                        Pekerjaan pekerjaan = new Pekerjaan(
+                        List<Pekerjaan> pekerjaanList = new ArrayList<>();
+                        while (pekerjaanResultSet.next()) {
+                            Pekerjaan pekerjaan = new Pekerjaan(
                                 pekerjaanResultSet.getInt("ID_pekerjaan"),
                                 pekerjaanResultSet.getString("Deskripsi"),
                                 pekerjaanResultSet.getString("Lokasi_Job"),
                                 pekerjaanResultSet.getDouble("Gaji"),
                                 pekerjaanResultSet.getDate("Waktu_mulai").toLocalDate(),
                                 pekerjaanResultSet.getDate("Waktu_Selesai").toLocalDate(),
-                                pekerjaanResultSet.getInt("ID_Pekerja"),
-                                pekerjaanResultSet.getString("status_kerja"),
-                                pekerjaanResultSet.getInt("jml_pekerja"),
+                                pekerjaanResultSet.getObject("ID_Pekerja", Integer.class), // Nullable
+                                pekerjaanResultSet.getObject("jml_pekerja", Integer.class), // Nullable
                                 pekerjaanResultSet.getInt("ID_Pemilik")
-                        );
-                        pekerjaanList.add(pekerjaan);
-                    }
+                            );
+                            pekerjaanList.add(pekerjaan);
+                        }
 
-                    pekerjaanTable.getItems().setAll(pekerjaanList);
+                        // Menambahkan data ke tabel
+                        pekerjaanTable.getItems().setAll(pekerjaanList);
+                    }
+                }
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Error saat memuat data pekerjaan: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+    private void handleApply(Pekerjaan pekerjaan) {
+        String checkQuery = "SELECT COUNT(*) FROM applied_pekerjaan WHERE ID_Pekerjaan = ? AND ID_Pekerja = ?";
+        String insertQuery = "INSERT INTO applied_pekerjaan (ID_Pekerjaan, ID_Pekerja, Tanggal_Apply) VALUES (?, ?, NOW())";
+
+        try (Connection connection = BaseDAO.getConnection();
+             PreparedStatement checkStatement = connection.prepareStatement(checkQuery)) {
+
+            // Gunakan ID pekerja yang sedang login
+            int idPekerja = Session.getUserId(); // Pastikan Anda sudah mengimplementasikan Session.getUserId()
+
+            // Cek apakah pekerja sudah apply untuk pekerjaan ini
+            checkStatement.setInt(1, pekerjaan.getIdPekerjaan());
+            checkStatement.setInt(2, idPekerja);
+            ResultSet resultSet = checkStatement.executeQuery();
+
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                // Jika sudah apply, tampilkan popup
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informasi");
+                alert.setHeaderText(null);
+                alert.setContentText("Anda sudah apply untuk pekerjaan ini.");
+                alert.showAndWait();
+            } else {
+                // Jika belum apply, masukkan data ke tabel
+                try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
+                    insertStatement.setInt(1, pekerjaan.getIdPekerjaan());
+                    insertStatement.setInt(2, idPekerja);
+
+                    int rowsInserted = insertStatement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Berhasil");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Anda berhasil apply untuk pekerjaan ini.");
+                        alert.showAndWait();
+                    }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Terjadi kesalahan saat mencoba apply pekerjaan.");
+            alert.showAndWait();
         }
     }
-    private void handleApply(Pekerjaan pekerjaan) {
-        String query = "INSERT INTO applied_pekerjaan (ID_Pekerjaan, ID_Pekerja, Tanggal_Apply) VALUES (?, ?, NOW())";
-        try (Connection connection = BaseDAO.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            // Gunakan ID pekerja yang sedang login
-            int idPekerja = Session.getUserId();  // Implementasikan metode untuk mendapatkan ID pekerja saat ini
-            preparedStatement.setInt(1, pekerjaan.getIdPekerjaan());
-            preparedStatement.setInt(2, idPekerja);
-
-            int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Berhasil mengajukan pekerjaan!");
-            }
-        } catch (SQLException e) {
+     @FXML
+    private void switchScene(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPekerjaEdit.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Edit Data Diri Pekerja");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void switchScene2(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KontrakKerjaPekerja.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Kontrak Kerja Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void switchScene3(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPekerja.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Laporan Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logout(ActionEvent event) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure want to Logout?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if (option.isPresent() && option.get().equals(ButtonType.OK)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+                Stage stage = (Stage) Logout_Button.getScene().getWindow();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Login");
+                stage.show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void switchScene4(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePekerja.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Home Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void initialize(URL url, ResourceBundle rb) {
     }
 }
