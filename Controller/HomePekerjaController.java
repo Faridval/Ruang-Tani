@@ -20,16 +20,41 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 
 public class HomePekerjaController {
 
+   @FXML
+    private Button Datadiri_Button;
+
+    @FXML
+    private Button Home_Button;
+
+    @FXML
+    private Button KontrakKerja_Button;
+
+    @FXML
+    private Button Laporan_Button;
+
+    @FXML
+    private Button Logout_Button;
+
+    @FXML
+    private TextField Search_Button;
+
     @FXML
     private VBox lahanContainer;
+
 
     // Method untuk mengambil data lahan dari database
     private List<Lahan> getLahanData() {
@@ -126,9 +151,72 @@ public class HomePekerjaController {
         stage.setScene(new Scene(detailLahanRoot));
         stage.show();
     }
-
     @FXML
     public void initialize() {
+        loadLahanData();
+    }
+     @FXML
+    private void switchScene(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPekerjaEdit.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Edit Data Diri Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void switchScene2(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KontrakKerjaPekerja.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Kontrak Kerja Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void switchScene3(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPekerja.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Laporan Pekerja");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logout(ActionEvent event) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure want to Logout?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if (option.isPresent() && option.get().equals(ButtonType.OK)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+                Stage stage = (Stage) Logout_Button.getScene().getWindow();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Login");
+                stage.show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void initialize(URL url, ResourceBundle rb) {
         loadLahanData();
     }
 }
