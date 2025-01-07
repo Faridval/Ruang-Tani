@@ -1,0 +1,195 @@
+package Controller;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import Model.AppliedPekerjaan;
+import dao.BaseDAO;
+import dao.PekerjaanDAOImpl;
+import java.io.IOException;
+import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class KontrakKerjaPemilikController {
+    
+    
+    @FXML
+    private Button button_BiodataPemilik;
+
+    @FXML
+    private Button button_LaporanPemilik;
+
+    @FXML
+    private Button button_kelolaLahan;
+
+    @FXML
+    private Button button_kelolaPekerjaan;
+
+    @FXML
+    private TableView<AppliedPekerjaan> pekerjaTable;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> namaPekerja;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> alamatPekerja;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> noKTP;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> noHP;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> keterampilan;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, String> riwayatPekerjaan;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, Button> accept;
+
+    @FXML
+    private TableColumn<AppliedPekerjaan, Button> reject;
+
+    private ObservableList<AppliedPekerjaan> pekerjaList = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        // Set up columns
+        namaPekerja.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        alamatPekerja.setCellValueFactory(new PropertyValueFactory<>("alamat"));
+        noKTP.setCellValueFactory(new PropertyValueFactory<>("noKtp"));
+        noHP.setCellValueFactory(new PropertyValueFactory<>("noHp"));
+        riwayatPekerjaan.setCellValueFactory(new PropertyValueFactory<>("riwayatPekerjaan"));
+        accept.setCellValueFactory(new PropertyValueFactory<>("acceptButton"));
+        reject.setCellValueFactory(new PropertyValueFactory<>("rejectButton"));
+
+        // Load data from database
+        loadPekerjaData();
+    }
+
+private void loadPekerjaData() {
+    pekerjaList.clear();
+
+    // Buat instance DAO
+    PekerjaanDAOImpl pekerjaanDAO = new PekerjaanDAOImpl(BaseDAO.getConnection());
+
+    // Ambil data applied pekerja dari database
+    List<AppliedPekerjaan> data = pekerjaanDAO.getAppliedPekerjaList();
+
+    // Untuk setiap pekerja, tambahkan tombol Accept dan Reject
+    for (AppliedPekerjaan pekerja : data) {
+        Button acceptButton = new Button("Accept");
+        acceptButton.setOnAction(e -> handleAccept(pekerja));
+
+        Button rejectButton = new Button("Reject");
+        rejectButton.setOnAction(e -> handleReject(pekerja));
+
+        pekerja.setAcceptButton(acceptButton);
+        pekerja.setRejectButton(rejectButton);
+
+        pekerjaList.add(pekerja);
+    }
+
+    pekerjaTable.setItems(FXCollections.observableArrayList(pekerjaList));
+}
+
+@FXML
+    private void switchScene(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DahsboardPemilikLahan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Dahsboard Pemilik Lahan");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    
+    @FXML
+private void switchScene2(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/KelolaPekerjaan.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Kelola Peekerjaan");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+@FXML
+private void switchScene3(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LaporanPemilik.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Biodata");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+@FXML
+private void switchScene4(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DataDiriPemilikEdit.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Data Diri Pemilik");
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+private void handleAccept(AppliedPekerjaan pekerja) {
+    // Buat instance DAO
+    PekerjaanDAOImpl pekerjaanDAO = new PekerjaanDAOImpl(BaseDAO.getConnection());
+
+    // Update status di database menjadi 'Accepted'
+    boolean success = pekerjaanDAO.updateAppliedStatus(pekerja.getIdApply(), "Accepted");
+    if (success) {
+        showAlert("Success", "Pekerja " + pekerja.getNama() + " telah diterima.");
+        loadPekerjaData(); // Refresh tabel
+    } else {
+        showAlert("Error", "Gagal menerima pekerja " + pekerja.getNama() + ".");
+    }
+}
+
+private void handleReject(AppliedPekerjaan pekerja) {
+    // Buat instance DAO
+    PekerjaanDAOImpl pekerjaanDAO = new PekerjaanDAOImpl(BaseDAO.getConnection());
+
+    // Update status di database menjadi 'Rejected'
+    boolean success = pekerjaanDAO.updateAppliedStatus(pekerja.getIdApply(), "Rejected");
+    if (success) {
+        showAlert("Success", "Pekerja " + pekerja.getNama() + " telah ditolak.");
+        loadPekerjaData(); // Refresh tabel
+    } else {
+        showAlert("Error", "Gagal menolak pekerja " + pekerja.getNama() + ".");
+    }
+}
+
+private void showAlert(String title, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+}
